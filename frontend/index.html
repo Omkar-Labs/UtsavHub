@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎪</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UtsavHub - Retro-Collegiate Event & Team Platform</title>
+
+    <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              // Retro Funky & Premium Warm Collegiate Palette
+              'primary': '#ff4d2e',             // Retro Vermilion / Electric Terracotta
+              'primary-hover': '#e63d1e',
+              'primary-container': '#381610',
+              'on-primary': '#ffffff',
+              'on-primary-container': '#ffdad2',
+
+              'secondary': '#f59e0b',           // Vintage Trophy Mustard / Honey Amber
+              'secondary-container': '#422405',
+              'on-secondary': '#1c1917',
+
+              'tertiary': '#10b981',            // Retro Varsity Emerald / Mint
+              'tertiary-container': '#063725',
+
+              'background': '#131211',          // Rich Warm Espresso Noir
+              'surface': '#1a1815',             // Warm Cocoa Charcoal
+              'surface-container-low': '#1a1815',
+              'surface-container': '#23201c',   // Warm Card Slate
+              'surface-container-high': '#2c2824',
+              'surface-container-highest': '#38332d',
+
+              'on-surface': '#fcfaf6',          // Warm Cream White
+              'on-surface-variant': '#a8a29e',  // Warm Stone / Sand
+              'outline': '#57534e',             // Vintage Warm Border
+              'outline-variant': '#2b2723'
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              headline: ['Space Grotesk', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      body {
+        background-color: #131211;
+        color: #fcfaf6;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #131211;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2c2824;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #38332d;
+      }
+    </style>
+    <!-- Razorpay Standard Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body class="bg-[#131211] text-[#fcfaf6] min-h-screen selection:bg-[#ff4d2e] selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
