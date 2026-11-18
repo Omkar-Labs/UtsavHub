@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { eventsApi } from "../api/events";
 import { useToast } from "../context/ToastContext";
-import { Loader2, Calendar, Clock, MapPin, Building, AlertCircle } from "lucide-react";
+import { Loader2, Calendar, Clock, MapPin, Building, AlertCircle, X } from "lucide-react";
 
 export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) {
   const { showToast } = useToast();
@@ -37,7 +37,6 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
     e.preventDefault();
     setErrorMessage("");
 
-    // Front-end Validations
     if (!eventName.trim()) {
       setErrorMessage("Event name is required.");
       return;
@@ -101,25 +100,25 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-2xl sm:rounded-3xl max-w-xl w-full p-4 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto">
         {/* Retro Header Accent Bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#ff4d2e] via-[#f59e0b] to-[#10b981]"></div>
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-5 pt-1">
+        <div className="flex items-start justify-between gap-3 mb-4 pt-1 sm:pt-2">
           <div>
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#f59e0b] flex items-center gap-1.5">
-              <Building className="w-3.5 h-3.5" />
-              Campus Organizer Console • {user?.college || "IET Lucknow"}
+            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#f59e0b] flex items-center gap-1.5">
+              <Building className="w-3.5 h-3.5 shrink-0" />
+              <span>Organizer Console • {user?.college || "IET Lucknow"}</span>
             </span>
-            <h2 className="font-headline text-2xl font-extrabold text-white mt-1">Publish New Campus Event</h2>
+            <h2 className="font-headline text-xl sm:text-2xl font-extrabold text-white mt-1">Publish New Campus Event</h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors"
+            className="p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors shrink-0"
           >
-            <span className="material-symbols-outlined text-xl">close</span>
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -131,7 +130,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-xs">
           <div>
             <label className="block font-semibold text-stone-300 mb-1">Event Name *</label>
             <input
@@ -139,18 +138,18 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
               required
               value={eventName}
               onChange={(e) => setEventName(e.target.value)}
-              placeholder="e.g. HackIET 2026, RoboWars, Clash of Coders"
-              className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+              placeholder="e.g. HackIET 2026, RoboWars"
+              className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div>
               <label className="block font-semibold text-stone-300 mb-1">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               >
                 <option value="Hackathons" className="bg-[#1a1815]">Hackathons</option>
                 <option value="Technical" className="bg-[#1a1815]">Technical</option>
@@ -166,7 +165,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
               <select
                 value={collegeScope}
                 onChange={(e) => setCollegeScope(e.target.value)}
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               >
                 <option value="All Colleges (Inter-College)" className="bg-[#1a1815]">All Colleges (Open Inter-College)</option>
                 <option value={`My College Only (${user?.college || "IET Lucknow"})`} className="bg-[#1a1815]">
@@ -176,7 +175,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div>
               <label className="block font-semibold text-stone-300 mb-1">Registration Fee (₹)</label>
               <input
@@ -185,7 +184,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                 value={registrationFee}
                 onChange={(e) => setRegistrationFee(e.target.value)}
                 placeholder="0 for Free Event"
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               />
             </div>
 
@@ -197,16 +196,16 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                 required
                 value={seatLimit}
                 onChange={(e) => setSeatLimit(e.target.value)}
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
             <div>
               <label className="block font-semibold text-stone-300 mb-1 flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-stone-400" />
-                Event Date *
+                <span>Event Date *</span>
               </label>
               <input
                 type="text"
@@ -214,14 +213,14 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                 value={eventDate}
                 onChange={(e) => setEventDate(e.target.value)}
                 placeholder="e.g. Dec 20, 2026"
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               />
             </div>
 
             <div>
               <label className="block font-semibold text-stone-300 mb-1 flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5 text-stone-400" />
-                Event Time *
+                <span>Event Time *</span>
               </label>
               <input
                 type="text"
@@ -229,7 +228,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                 value={eventTime}
                 onChange={(e) => setEventTime(e.target.value)}
                 placeholder="e.g. 09:30 AM IST"
-                className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
               />
             </div>
           </div>
@@ -237,7 +236,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
           <div>
             <label className="block font-semibold text-stone-300 mb-1 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-stone-400" />
-              Venue Location *
+              <span>Venue Location *</span>
             </label>
             <input
               type="text"
@@ -245,7 +244,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
               value={venue}
               onChange={(e) => setVenue(e.target.value)}
               placeholder="e.g. APJ Abdul Kalam Auditorium, CSE Block"
-              className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+              className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
             />
           </div>
 
@@ -256,7 +255,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
               value={bannerImage}
               onChange={(e) => setBannerImage(e.target.value)}
               placeholder="https://images.unsplash.com/..."
-              className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+              className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
             />
           </div>
 
@@ -268,16 +267,16 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide event details, schedule, rounds, and eligibility criteria..."
-              className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl p-3 text-white focus:outline-none focus:border-[#ff4d2e]"
+              className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl p-3 text-white focus:outline-none focus:border-[#ff4d2e]"
             />
           </div>
 
           {/* Squad / Team Settings */}
-          <div className="p-4 rounded-2xl bg-[#23201c] border border-[#38332d] space-y-3">
+          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#23201c] border border-[#38332d] space-y-3">
             <div className="flex items-center justify-between">
               <div>
                 <span className="font-bold text-white block">Group / Squad Registration</span>
-                <span className="text-[11px] text-stone-400">Allows solo matchmaking and team code join</span>
+                <span className="text-[10px] sm:text-[11px] text-stone-400">Allows solo matchmaking and team code join</span>
               </div>
               <input
                 type="checkbox"
@@ -289,37 +288,37 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
 
             {isTeam && (
               <div className="pt-3 border-t border-[#38332d] space-y-3">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                   <div>
-                    <label className="block text-[11px] font-semibold text-stone-300 mb-1">Min Team Size (≥2)</label>
+                    <label className="block text-[10px] sm:text-[11px] font-semibold text-stone-300 mb-1">Min Team Size (≥2)</label>
                     <input
                       type="number"
                       min="2"
                       max="15"
                       value={minTeamSize}
                       onChange={(e) => setMinTeamSize(e.target.value)}
-                      className="w-full bg-[#1a1815] border border-[#38332d] rounded-xl p-2 text-white"
+                      className="w-full bg-[#1a1815] border border-[#38332d] rounded-lg sm:rounded-xl p-2 text-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-semibold text-stone-300 mb-1">Max Team Size</label>
+                    <label className="block text-[10px] sm:text-[11px] font-semibold text-stone-300 mb-1">Max Team Size</label>
                     <input
                       type="number"
                       min="2"
                       max="15"
                       value={maxTeamSize}
                       onChange={(e) => setMaxTeamSize(e.target.value)}
-                      className="w-full bg-[#1a1815] border border-[#38332d] rounded-xl p-2 text-white"
+                      className="w-full bg-[#1a1815] border border-[#38332d] rounded-lg sm:rounded-xl p-2 text-white"
                     />
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-2xl bg-[#f59e0b]/15 border border-[#f59e0b]/30">
+                <div className="flex items-center justify-between p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#f59e0b]/15 border border-[#f59e0b]/30">
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-[#f59e0b] text-base font-bold">female</span>
                     <div>
-                      <span className="font-bold text-white text-xs block">Gender Diversity Requirement</span>
-                      <span className="text-[10px] text-amber-200">Mandate at least 1 female teammate in every squad</span>
+                      <span className="font-bold text-white text-[11px] sm:text-xs block">Gender Diversity Mandate</span>
+                      <span className="text-[9px] sm:text-[10px] text-amber-200">Mandate at least 1 female teammate</span>
                     </div>
                   </div>
                   <input
@@ -335,11 +334,11 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
 
           {/* Paid Event: Payout Info */}
           {Number(registrationFee) > 0 && (
-            <div className="p-4 rounded-2xl bg-[#14231b] border border-emerald-800/40 space-y-3">
+            <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#14231b] border border-emerald-800/40 space-y-2.5 sm:space-y-3">
               <span className="font-bold text-emerald-300 block text-xs">
                 College Treasury Payout Details (Optional)
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
                   <label className="block text-[10px] font-semibold text-emerald-200 mb-1">College UPI ID</label>
                   <input
@@ -347,7 +346,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                     value={upiId}
                     onChange={(e) => setUpiId(e.target.value)}
                     placeholder="treasury@okaxis"
-                    className="w-full bg-[#0d1611] border border-emerald-800/60 rounded-xl p-2 text-white"
+                    className="w-full bg-[#0d1611] border border-emerald-800/60 rounded-lg sm:rounded-xl p-2 text-white"
                   />
                 </div>
                 <div>
@@ -357,7 +356,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
                     value={bankName}
                     onChange={(e) => setBankName(e.target.value)}
                     placeholder="e.g. State Bank of India"
-                    className="w-full bg-[#0d1611] border border-emerald-800/60 rounded-xl p-2 text-white"
+                    className="w-full bg-[#0d1611] border border-emerald-800/60 rounded-lg sm:rounded-xl p-2 text-white"
                   />
                 </div>
               </div>
@@ -367,7 +366,7 @@ export default function CreateEventModal({ isOpen, onClose, onAddEvent, user }) 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 rounded-2xl bg-[#ff4d2e] hover:bg-[#e63d1e] text-white font-extrabold text-xs transition-colors shadow-lg shadow-[#ff4d2e]/25 mt-2 flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl sm:rounded-2xl bg-[#ff4d2e] hover:bg-[#e63d1e] text-white font-extrabold text-xs transition-colors shadow-lg shadow-[#ff4d2e]/25 mt-2 flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isSubmitting ? (
               <>

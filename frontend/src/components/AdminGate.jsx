@@ -4,7 +4,6 @@ import { paymentsApi } from "../api/payments";
 import { useToast } from "../context/ToastContext";
 import {
   ShieldCheck,
-  QrCode,
   Download,
   Users,
   CreditCard,
@@ -15,7 +14,6 @@ import {
   Camera,
   RefreshCw,
   Building,
-  Calendar,
 } from "lucide-react";
 
 export default function AdminGate({ events = [], viewMode = "dashboard", user }) {
@@ -71,7 +69,6 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
           setRevenueData(revRes);
         }
       } catch (e) {
-        // Event might be free or no payments recorded yet
         setRevenueData(null);
       }
     } catch (err) {
@@ -102,7 +99,6 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         eventId: selectedEventId || undefined,
       });
 
-      // API returned 200 with valid status
       setScanResult({
         status: res.status || "valid",
         title: res.title || "VALID TICKET: Check-In Approved",
@@ -112,8 +108,6 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
 
       showToast(res.message, "success", "Gate Verified");
       setScanInput("");
-
-      // Refresh attendee list to update check-in badges
       fetchAttendeesData();
     } catch (err) {
       const errorData = err.response?.data;
@@ -169,12 +163,11 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
       }
       setCameraActive(true);
     } catch (err) {
-      setCameraError("Camera access denied or unavailable. You can enter or paste the QR token manually.");
+      setCameraError("Camera access unavailable. You can type or paste the QR token manually.");
       setCameraActive(false);
     }
   };
 
-  // Clean up camera on unmount
   useEffect(() => {
     return () => {
       if (streamRef.current) {
@@ -234,22 +227,21 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
     showToast("Attendee roster exported successfully!", "success", "CSV Downloaded");
   };
 
-  const eventName = currentEvent.eventName || currentEvent.title || "Campus Event";
   const seatCap = currentEvent.seatLimit || 100;
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 bg-[#131211] text-[#fcfaf6]">
+    <div className="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-6 sm:py-10 bg-[#131211] text-[#fcfaf6]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
           <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#f59e0b] mb-1">
             <ShieldCheck className="w-4 h-4" />
             <span>Organizer Console • {user?.college || "Campus Node"}</span>
           </div>
-          <h1 className="font-headline text-3xl font-extrabold text-white tracking-tight">
+          <h1 className="font-headline text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             {viewMode === "scanner" ? "Gate QR Scanner Terminal" : "Admin Operations & Analytics"}
           </h1>
-          <p className="text-sm text-stone-400 mt-1 max-w-2xl">
+          <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl">
             {viewMode === "scanner"
               ? "Scan attendee digital QR passes at the entrance checkpoint with automated duplicate access detection."
               : "Audit registrations, view live fee collections, monitor attendee rosters, and export accreditation lists."}
@@ -257,14 +249,14 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         </div>
 
         {/* Event Selector & Actions */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <select
             value={selectedEventId}
             onChange={(e) => {
               setSelectedEventId(e.target.value);
               setScanResult(null);
             }}
-            className="bg-[#1a1815] border-2 border-[#2c2824] text-xs text-white rounded-2xl px-4 py-2.5 font-bold focus:outline-none focus:border-[#f59e0b]"
+            className="bg-[#1a1815] border-2 border-[#2c2824] text-xs text-white rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-2.5 font-bold focus:outline-none focus:border-[#f59e0b] flex-1 sm:flex-none truncate"
           >
             {events.map((ev) => (
               <option key={ev._id || ev.id} value={ev._id || ev.id}>
@@ -277,14 +269,14 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
             onClick={fetchAttendeesData}
             title="Refresh Live Data"
             disabled={isLoading}
-            className="p-2.5 rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border-2 border-[#38332d] text-stone-300 transition-colors"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border-2 border-[#38332d] text-stone-300 transition-colors"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
           </button>
 
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 bg-[#23201c] hover:bg-[#2c2824] text-stone-200 border-2 border-[#38332d] px-4 py-2.5 rounded-2xl text-xs font-bold transition-colors shrink-0"
+            className="flex items-center gap-1.5 bg-[#23201c] hover:bg-[#2c2824] text-stone-200 border-2 border-[#38332d] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition-colors shrink-0"
           >
             <Download className="w-4 h-4 text-[#10b981]" />
             <span>Export CSV</span>
@@ -292,114 +284,114 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         </div>
       </div>
 
-      {/* Telemetry Stats Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="p-5 rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+      {/* Telemetry Stats Bar (2 col on mobile, 4 col on md+) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
               Total Registered
             </span>
-            <div className="font-headline text-2xl sm:text-3xl font-extrabold text-white mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-white mt-1">
               {stats.totalRegistered}
             </div>
-            <span className="text-[11px] text-stone-400">Cap: {seatCap}</span>
+            <span className="text-[10px] sm:text-[11px] text-stone-400">Cap: {seatCap}</span>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#ff4d2e]/15 text-[#ff4d2e] flex items-center justify-center font-bold">
-            <Users className="w-5 h-5" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#ff4d2e]/15 text-[#ff4d2e] flex items-center justify-center font-bold">
+            <Users className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-5 rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
               Paid Registrations
             </span>
-            <div className="font-headline text-2xl sm:text-3xl font-extrabold text-[#f59e0b] mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#f59e0b] mt-1">
               {stats.totalPaid}
             </div>
-            <span className="text-[11px] text-stone-400">
-              ₹{stats.totalRevenue.toLocaleString("en-IN")} Revenue
+            <span className="text-[10px] sm:text-[11px] text-stone-400">
+              ₹{stats.totalRevenue.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#f59e0b]/15 text-[#f59e0b] flex items-center justify-center font-bold">
-            <CreditCard className="w-5 h-5" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#f59e0b]/15 text-[#f59e0b] flex items-center justify-center font-bold">
+            <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-5 rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
               Gate Check-Ins
             </span>
-            <div className="font-headline text-2xl sm:text-3xl font-extrabold text-[#10b981] mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#10b981] mt-1">
               {stats.totalCheckedIn}
             </div>
-            <span className="text-[11px] text-stone-400">
+            <span className="text-[10px] sm:text-[11px] text-stone-400">
               {stats.totalRegistered > 0
                 ? `${Math.round((stats.totalCheckedIn / stats.totalRegistered) * 100)}% Verified`
                 : "0%"}
             </span>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#10b981]/15 text-[#10b981] flex items-center justify-center font-bold">
-            <CheckCircle2 className="w-5 h-5" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#10b981]/15 text-[#10b981] flex items-center justify-center font-bold">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-5 rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
               Participation
             </span>
-            <div className="font-headline text-lg font-extrabold text-white mt-1">
+            <div className="font-headline text-sm sm:text-lg font-extrabold text-white mt-1">
               {currentEvent.eventType === "Team"
                 ? `Squad ${currentEvent.minTeamSize}-${currentEvent.maxTeamSize}`
                 : "Solo Entry"}
             </div>
-            <span className="text-[11px] text-stone-400 truncate block max-w-[120px]">
+            <span className="text-[10px] sm:text-[11px] text-stone-400 truncate block max-w-[100px] sm:max-w-[120px]">
               {currentEvent.category || "General"}
             </span>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#23201c] text-stone-300 flex items-center justify-center font-bold">
-            <Building className="w-5 h-5" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#23201c] text-stone-300 flex items-center justify-center font-bold">
+            <Building className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
       </div>
 
-      {/* Main Two-Panel Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Main Two-Panel Layout (Stacks on mobile/tablet, 2-panel on lg+) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
         {/* Scanner Terminal */}
         <div
           className={`${
             viewMode === "scanner" ? "lg:col-span-7" : "lg:col-span-5"
-          } bg-[#1a1815] border-2 border-[#2c2824] rounded-3xl p-6 sm:p-7 shadow-xl`}
+          } bg-[#1a1815] border-2 border-[#2c2824] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl`}
         >
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#10b981] animate-ping"></div>
-              <h2 className="font-headline text-xl font-bold text-white">Live Gate Scanner Terminal</h2>
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#10b981] animate-ping"></div>
+              <h2 className="font-headline text-lg sm:text-xl font-bold text-white">Live Gate Scanner Terminal</h2>
             </div>
             <button
               onClick={toggleCamera}
-              className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-colors ${
+              className={`p-1.5 sm:p-2 rounded-xl border text-[11px] sm:text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0 ${
                 cameraActive
                   ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
                   : "bg-[#23201c] hover:bg-[#2c2824] text-stone-300 border-[#38332d]"
               }`}
             >
-              <Camera className="w-4 h-4" />
+              <Camera className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>{cameraActive ? "Stop Camera" : "Scan via Camera"}</span>
             </button>
           </div>
 
           <p className="text-xs text-stone-400 mb-4">
-            Decode QR codes or input ticket tokens to record admission attendance and block duplicate entry attempts.
+            Decode QR passes or input ticket tokens to record admission attendance and block duplicate entry attempts.
           </p>
 
-          {/* Camera Viewport (Optional) */}
+          {/* Camera Viewport */}
           {cameraActive && (
-            <div className="relative mb-5 rounded-2xl overflow-hidden border-2 border-[#ff4d2e] bg-black h-56 flex items-center justify-center">
+            <div className="relative mb-4 sm:mb-5 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#ff4d2e] bg-black h-48 sm:h-56 flex items-center justify-center">
               <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
-              <div className="absolute inset-0 border-2 border-dashed border-[#10b981]/70 m-6 rounded-xl pointer-events-none flex items-center justify-center">
+              <div className="absolute inset-0 border-2 border-dashed border-[#10b981]/70 m-4 sm:m-6 rounded-xl pointer-events-none flex items-center justify-center">
                 <span className="text-[10px] font-mono font-bold text-[#10b981] bg-black/70 px-2 py-0.5 rounded">
                   ALIGN QR PASS IN RETICLE
                 </span>
@@ -426,12 +418,12 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                   value={scanInput}
                   onChange={(e) => setScanInput(e.target.value)}
                   placeholder="e.g. UTSV-QR-... or TKT-2026-..."
-                  className="w-full bg-[#23201c] border border-[#38332d] rounded-2xl px-4 py-3 text-xs text-white placeholder:text-stone-500 focus:outline-none focus:border-[#f59e0b] font-mono"
+                  className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl pl-3.5 pr-20 sm:pr-24 py-2.5 sm:py-3 text-xs text-white placeholder:text-stone-500 focus:outline-none focus:border-[#f59e0b] font-mono"
                 />
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 rounded-xl bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 text-xs font-extrabold transition-colors disabled:opacity-50 flex items-center gap-1.5"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-xl bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 text-xs font-extrabold transition-colors disabled:opacity-50 flex items-center gap-1.5"
                 >
                   {isVerifying ? (
                     <>
@@ -439,7 +431,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                       <span>Verifying...</span>
                     </>
                   ) : (
-                    "Verify Gate Entry"
+                    "Verify Gate"
                   )}
                 </button>
               </div>
@@ -448,25 +440,25 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
 
           {/* Quick simulation pills from registered attendees */}
           {attendees.length > 0 && (
-            <div className="mt-5 pt-4 border-t border-[#2b2723]">
-              <span className="text-[11px] font-bold text-stone-400 block mb-2 font-mono">
+            <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-[#2b2723]">
+              <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 block mb-2 font-mono">
                 Click Attendee to Simulate Live Gate Scan:
               </span>
-              <div className="flex flex-col gap-2 max-h-48 overflow-y-auto">
+              <div className="flex flex-col gap-2 max-h-44 sm:max-h-48 overflow-y-auto">
                 {attendees.slice(0, 3).map((a) => (
                   <button
                     key={a._id}
                     onClick={() => simulateScan(a.qrToken || a.ticketId)}
-                    className="p-3 rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border border-[#38332d] text-left text-xs text-stone-300 flex items-center justify-between transition-colors"
+                    className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border border-[#38332d] text-left text-xs text-stone-300 flex items-center justify-between transition-colors"
                   >
                     <div className="truncate">
                       <span className="font-bold text-white">{a.student?.name}</span>
-                      <span className="text-[11px] text-stone-400 ml-2 font-mono">
+                      <span className="text-[10px] sm:text-[11px] text-stone-400 ml-1.5 font-mono">
                         ({a.ticketId})
                       </span>
                     </div>
                     <span
-                      className={`text-[10px] font-mono font-bold shrink-0 ml-2 px-2 py-0.5 rounded ${
+                      className={`text-[9px] sm:text-[10px] font-mono font-bold shrink-0 ml-2 px-2 py-0.5 rounded ${
                         a.checkedIn ? "bg-emerald-500/20 text-emerald-300" : "bg-[#f59e0b]/20 text-[#f59e0b]"
                       }`}
                     >
@@ -481,7 +473,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
           {/* Scan Result Feedback Alert */}
           {scanResult && (
             <div
-              className={`mt-6 p-4 rounded-2xl border-2 text-xs animate-slide-in ${
+              className={`mt-4 sm:mt-6 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-xs animate-slide-in ${
                 scanResult.status === "valid"
                   ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
                   : scanResult.status === "duplicate"
@@ -489,11 +481,11 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                   : "bg-red-500/15 border-red-500/40 text-red-300"
               }`}
             >
-              <div className="flex items-center gap-2 font-extrabold text-sm mb-1">
-                {scanResult.status === "valid" && <CheckCircle2 className="w-5 h-5 shrink-0" />}
-                {scanResult.status === "duplicate" && <AlertTriangle className="w-5 h-5 shrink-0" />}
+              <div className="flex items-center gap-2 font-extrabold text-xs sm:text-sm mb-1">
+                {scanResult.status === "valid" && <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />}
+                {scanResult.status === "duplicate" && <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />}
                 {scanResult.status !== "valid" && scanResult.status !== "duplicate" && (
-                  <XCircle className="w-5 h-5 shrink-0" />
+                  <XCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                 )}
                 <span>{scanResult.title}</span>
               </div>
@@ -512,22 +504,22 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         <div
           className={`${
             viewMode === "scanner" ? "lg:col-span-5" : "lg:col-span-7"
-          } bg-[#1a1815] border-2 border-[#2c2824] rounded-3xl p-6 sm:p-7 shadow-xl`}
+          } bg-[#1a1815] border-2 border-[#2c2824] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl`}
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-headline text-xl font-bold text-white">Live Attendee Roster</h2>
-            <span className="text-xs text-stone-400 font-mono">{attendees.length} Verified Records</span>
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h2 className="font-headline text-lg sm:text-xl font-bold text-white">Live Attendee Roster</h2>
+            <span className="text-[11px] sm:text-xs text-stone-400 font-mono">{attendees.length} Verified Records</span>
           </div>
 
-          <div className="overflow-x-auto max-h-[520px] overflow-y-auto">
-            <table className="w-full text-left text-xs text-stone-300">
-              <thead className="sticky top-0 bg-[#23201c] text-[10px] uppercase tracking-wider text-stone-400 border-b border-[#38332d] font-mono z-10">
+          <div className="overflow-x-auto max-h-[520px] overflow-y-auto -mx-2 sm:mx-0">
+            <table className="w-full text-left text-xs text-stone-300 min-w-[480px]">
+              <thead className="sticky top-0 bg-[#23201c] text-[9px] sm:text-[10px] uppercase tracking-wider text-stone-400 border-b border-[#38332d] font-mono z-10">
                 <tr>
-                  <th className="py-3 px-3">Attendee</th>
-                  <th className="py-3 px-3">Roll &amp; Branch</th>
-                  <th className="py-3 px-3">Squad</th>
-                  <th className="py-3 px-3">Fee Status</th>
-                  <th className="py-3 px-3">Gate Status</th>
+                  <th className="py-2.5 px-3">Attendee</th>
+                  <th className="py-2.5 px-3">Roll &amp; Branch</th>
+                  <th className="py-2.5 px-3">Squad</th>
+                  <th className="py-2.5 px-3">Fee Status</th>
+                  <th className="py-2.5 px-3">Gate Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#2b2723]">
@@ -547,22 +539,22 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                 ) : (
                   attendees.map((a) => (
                     <tr key={a._id} className="hover:bg-[#23201c]/50 transition-colors">
-                      <td className="py-3 px-3">
+                      <td className="py-2.5 px-3">
                         <div className="font-bold text-white">{a.student?.name || "Participant"}</div>
                         <div className="text-[10px] text-stone-500 font-mono truncate max-w-[120px]">
                           {a.student?.email}
                         </div>
                       </td>
-                      <td className="py-3 px-3 text-stone-400">
+                      <td className="py-2.5 px-3 text-stone-400">
                         {a.student?.rollNo || "N/A"}{" "}
                         <span className="text-stone-500">({a.student?.branch || "General"})</span>
                       </td>
-                      <td className="py-3 px-3 text-[#f59e0b] font-mono text-[11px] font-bold">
+                      <td className="py-2.5 px-3 text-[#f59e0b] font-mono text-[10px] sm:text-[11px] font-bold">
                         {a.teamName || "Individual"}
                       </td>
-                      <td className="py-3 px-3">
+                      <td className="py-2.5 px-3">
                         <span
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                          className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded ${
                             a.feeStatus === "Paid"
                               ? "bg-emerald-500/15 text-emerald-400"
                               : "bg-amber-500/15 text-amber-400"
@@ -571,7 +563,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                           {a.feeStatus}
                         </span>
                       </td>
-                      <td className="py-3 px-3">
+                      <td className="py-2.5 px-3">
                         {a.checkedIn ? (
                           <span className="inline-flex items-center gap-1 text-[10px] text-[#10b981] font-bold">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />

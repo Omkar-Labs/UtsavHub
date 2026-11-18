@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { collegesList } from "../data/mockData";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
-import { Loader2, Mail, Lock, KeyRound, ShieldAlert } from "lucide-react";
+import { Loader2, Mail, Lock, KeyRound, ShieldAlert, X } from "lucide-react";
 
 export default function AuthModal({ isOpen, onClose, initialRole = "Student", onLoginSuccess }) {
   const { login, register, sendOtp } = useAuth();
@@ -59,8 +59,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
       const res = await sendOtp(email.trim().toLowerCase());
       setOtpSent(true);
       showToast(res.message || "OTP sent to your institutional email", "success", "OTP Dispatched");
-      
-      // 60-second cooldown timer
+
       setOtpCountdown(60);
       const timer = setInterval(() => {
         setOtpCountdown((prev) => {
@@ -88,7 +87,6 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
 
     try {
       if (!isSignUp) {
-        // --- 1. REAL API LOGIN ---
         if (!email.trim() || !password.trim()) {
           setErrorMessage("Please enter both email and password.");
           setIsSubmitting(false);
@@ -100,7 +98,6 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
         if (onLoginSuccess) onLoginSuccess(user);
         onClose();
       } else {
-        // --- 2. REAL API REGISTRATION ---
         if (!otp.trim()) {
           setErrorMessage("Verification OTP is required. Click 'Send OTP' and check your inbox.");
           setIsSubmitting(false);
@@ -124,10 +121,9 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           payload.rollNo = rollNo.trim();
           payload.college = selectedCollege;
           payload.branch = branch;
-          payload.gender = gender; // Backend enum: "Male" | "Female" | "Other"
+          payload.gender = gender;
           payload.skills = skills ? skills.split(",").map((s) => s.trim()).filter(Boolean) : [];
         } else {
-          // Admin Validation
           if (!adminName.trim() || !collegeDomain.trim() || !designation.trim()) {
             setErrorMessage("Please fill all required administrator fields.");
             setIsSubmitting(false);
@@ -153,27 +149,27 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto">
         {/* Retro Header Accent Bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#ff4d2e] via-[#f59e0b] to-[#10b981]"></div>
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors"
+          className="absolute right-4 top-4 p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors"
         >
-          <span className="material-symbols-outlined text-xl">close</span>
+          <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
-        <div className="mb-6 pt-2">
+        <div className="mb-4 sm:mb-6 pt-1 sm:pt-2">
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#ff4d2e]/15 border border-[#ff4d2e]/30 text-[#ff4d2e] font-mono text-[10px] font-bold tracking-wider uppercase">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#ff4d2e]/15 border border-[#ff4d2e]/30 text-[#ff4d2e] font-mono text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
               Retro Campus Gate
             </span>
           </div>
-          <h2 className="font-headline text-3xl font-extrabold text-[#fcfaf6] tracking-tight">
+          <h2 className="font-headline text-2xl sm:text-3xl font-extrabold text-[#fcfaf6] tracking-tight">
             {isSignUp ? `Create ${role} Account` : `Sign In as ${role}`}
           </h2>
           <p className="text-xs text-stone-400 mt-1">
@@ -184,18 +180,18 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
         </div>
 
         {/* Role Toggle Tabs */}
-        <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#131211] rounded-2xl border border-[#2b2723] mb-6">
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1 sm:p-1.5 bg-[#131211] rounded-xl sm:rounded-2xl border border-[#2b2723] mb-4 sm:mb-6">
           <button
             type="button"
             onClick={() => {
               setRole("Student");
               setErrorMessage("");
             }}
-            className={`py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+            className={`py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               role === "Student" ? "bg-[#ff4d2e] text-white shadow-md" : "text-stone-400 hover:text-white"
             }`}
           >
-            <span className="material-symbols-outlined text-base">school</span>
+            <span className="material-symbols-outlined text-sm sm:text-base">school</span>
             <span>Student</span>
           </button>
 
@@ -205,11 +201,11 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
               setRole("Admin");
               setErrorMessage("");
             }}
-            className={`py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+            className={`py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               role === "Admin" ? "bg-[#f59e0b] text-stone-950 shadow-md font-extrabold" : "text-stone-400 hover:text-white"
             }`}
           >
-            <span className="material-symbols-outlined text-base">admin_panel_settings</span>
+            <span className="material-symbols-outlined text-sm sm:text-base">admin_panel_settings</span>
             <span>College Admin</span>
           </button>
         </div>
@@ -222,13 +218,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           </div>
         )}
 
-        {/* FORM */}
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          {/* ================= MODE 1: LOGIN ================= */}
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 text-xs">
+          {/* Mode 1: Login */}
           {!isSignUp ? (
             <>
               <div>
-                <label className="block font-semibold text-stone-300 mb-1.5">
+                <label className="block font-semibold text-stone-300 mb-1 sm:mb-1.5">
                   {role === "Student" ? "College Student Email" : "Official Faculty / Admin Email"}
                 </label>
                 <div className="relative">
@@ -239,13 +235,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={role === "Student" ? "student@ietlucknow.ac.in" : "admin@ietlucknow.ac.in"}
-                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
+                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-stone-300 mb-1.5">Password</label>
+                <label className="block font-semibold text-stone-300 mb-1 sm:mb-1.5">Password</label>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 w-4 h-4" />
                   <input
@@ -254,13 +250,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
+                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
                   />
                 </div>
               </div>
             </>
           ) : (
-            /* ================= MODE 2: SIGN UP ================= */
+            /* Mode 2: Sign Up */
             <>
               {role === "Student" ? (
                 <>
@@ -272,11 +268,11 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
                       placeholder="e.g. Omkar Tripathi"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
                       <label className="block font-semibold text-stone-300 mb-1">College Email *</label>
                       <input
@@ -285,7 +281,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="roll@ietlucknow.ac.in"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                       />
                     </div>
 
@@ -297,22 +293,22 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={rollNo}
                         onChange={(e) => setRollNo(e.target.value)}
                         placeholder="2500520100142"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e] font-mono"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e] font-mono"
                       />
                     </div>
                   </div>
 
-                  {/* OTP Verification Row */}
-                  <div className="p-3 bg-[#131211] border border-[#38332d] rounded-xl">
+                  {/* OTP Row */}
+                  <div className="p-2.5 sm:p-3 bg-[#131211] border border-[#38332d] rounded-xl">
                     <div className="flex items-center justify-between mb-1.5">
                       <label className="block font-semibold text-stone-300">
-                        Institutional Email OTP *
+                        Email OTP Code *
                       </label>
                       <button
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isSendingOtp || otpCountdown > 0}
-                        className="text-[11px] font-bold text-[#ff4d2e] hover:text-[#ff6a50] disabled:text-stone-500 transition-colors flex items-center gap-1"
+                        className="text-[10px] sm:text-[11px] font-bold text-[#ff4d2e] hover:text-[#ff6a50] disabled:text-stone-500 transition-colors flex items-center gap-1"
                       >
                         {isSendingOtp ? (
                           <>
@@ -336,7 +332,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         maxLength={6}
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
-                        placeholder="Enter 6-digit OTP received on email"
+                        placeholder="6-digit OTP code"
                         className="w-full bg-[#23201c] border border-[#38332d] rounded-lg pl-9 pr-3 py-2 text-white font-mono tracking-widest text-sm focus:outline-none focus:border-[#ff4d2e]"
                       />
                     </div>
@@ -351,17 +347,17 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Minimum 6 characters"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                     <div>
                       <label className="block font-semibold text-stone-300 mb-1">College</label>
                       <select
                         value={selectedCollege}
                         onChange={(e) => setSelectedCollege(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                       >
                         {collegesList.map((c) => (
                           <option key={c.id} value={c.name} className="bg-[#1a1815]">
@@ -376,7 +372,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       <select
                         value={branch}
                         onChange={(e) => setBranch(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                       >
                         <option value="CSE" className="bg-[#1a1815]">CSE</option>
                         <option value="IT" className="bg-[#1a1815]">IT</option>
@@ -394,7 +390,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       <select
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                       >
                         <option value="Male" className="bg-[#1a1815]">Male</option>
                         <option value="Female" className="bg-[#1a1815]">Female</option>
@@ -409,13 +405,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       type="text"
                       value={skills}
                       onChange={(e) => setSkills(e.target.value)}
-                      placeholder="e.g. React, Node.js, UI/UX, Python"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      placeholder="e.g. React, Node.js, UI/UX"
+                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
                     />
                   </div>
                 </>
               ) : (
-                /* ADMIN SIGN UP */
+                /* Admin Sign Up */
                 <>
                   <div>
                     <label className="block font-semibold text-stone-300 mb-1">Faculty / Organizer Full Name *</label>
@@ -425,11 +421,11 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       value={adminName}
                       onChange={(e) => setAdminName(e.target.value)}
                       placeholder="e.g. Dr. Diksha Sharma"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
                       <label className="block font-semibold text-stone-300 mb-1">College Name</label>
                       <select
@@ -439,7 +435,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                           const found = collegesList.find((c) => c.name === e.target.value);
                           if (found) setCollegeDomain(found.domain);
                         }}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
                       >
                         {collegesList.map((c) => (
                           <option key={c.id} value={c.name} className="bg-[#1a1815]">
@@ -457,12 +453,12 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={collegeDomain}
                         onChange={(e) => setCollegeDomain(e.target.value)}
                         placeholder="ietlucknow.ac.in"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
                       <label className="block font-semibold text-stone-300 mb-1">Admin Email *</label>
                       <input
@@ -471,7 +467,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder={`admin@${collegeDomain}`}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
                       />
                     </div>
 
@@ -484,22 +480,22 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••••••"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
                       />
                     </div>
                   </div>
 
-                  {/* Admin OTP Verification Row */}
-                  <div className="p-3 bg-[#131211] border border-[#38332d] rounded-xl">
+                  {/* Admin OTP */}
+                  <div className="p-2.5 sm:p-3 bg-[#131211] border border-[#38332d] rounded-xl">
                     <div className="flex items-center justify-between mb-1.5">
                       <label className="block font-semibold text-stone-300">
-                        Admin Email Verification OTP *
+                        Admin Email OTP *
                       </label>
                       <button
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isSendingOtp || otpCountdown > 0}
-                        className="text-[11px] font-bold text-[#f59e0b] hover:text-[#fbbf24] disabled:text-stone-500 transition-colors flex items-center gap-1"
+                        className="text-[10px] sm:text-[11px] font-bold text-[#f59e0b] hover:text-[#fbbf24] disabled:text-stone-500 transition-colors flex items-center gap-1"
                       >
                         {isSendingOtp ? (
                           <>
@@ -523,7 +519,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         maxLength={6}
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
-                        placeholder="Enter 6-digit OTP received on email"
+                        placeholder="6-digit OTP code"
                         className="w-full bg-[#23201c] border border-[#38332d] rounded-lg pl-9 pr-3 py-2 text-white font-mono tracking-widest text-sm focus:outline-none focus:border-[#f59e0b]"
                       />
                     </div>
@@ -536,12 +532,12 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       required
                       value={designation}
                       onChange={(e) => setDesignation(e.target.value)}
-                      placeholder="e.g. Faculty Convener, CSE Council Head"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                      placeholder="e.g. Faculty Convener, Tech Council Head"
+                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
                     />
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b] text-[11px] leading-relaxed">
+                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b] text-[10px] sm:text-[11px] leading-relaxed">
                     <span className="font-bold">Quota Notice:</span> Maximum 2 Admin accounts permitted per institution domain to prevent unauthorized access.
                   </div>
                 </>
@@ -553,7 +549,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full py-3.5 rounded-xl font-bold text-xs tracking-wide shadow-lg transition-all duration-200 mt-2 flex items-center justify-center gap-2 ${
+            className={`w-full py-3 sm:py-3.5 rounded-xl font-bold text-xs tracking-wide shadow-lg transition-all duration-200 mt-2 flex items-center justify-center gap-2 ${
               role === "Student"
                 ? "bg-[#ff4d2e] hover:bg-[#e63d1e] text-white disabled:opacity-50"
                 : "bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 font-extrabold disabled:opacity-50"
@@ -572,8 +568,8 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           </button>
         </form>
 
-        {/* Switch between Sign In and Sign Up */}
-        <div className="mt-5 text-center pt-3 border-t border-[#2b2723]">
+        {/* Switch Sign In / Up */}
+        <div className="mt-4 sm:mt-5 text-center pt-3 border-t border-[#2b2723]">
           <button
             type="button"
             onClick={() => {

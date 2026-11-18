@@ -1,6 +1,6 @@
 import { User } from "../Model/user.model.js";
 import { OTP } from "../Model/otp.model.js";
-import { sendVerificationEmail } from "../utils/resend.js";
+import { sendVerificationEmail } from "../utils/nodemailer.js";
 import { generateAccessAndRefreshTokens, cookieOptions } from "../utils/token.js";
 import jwt from "jsonwebtoken";
 

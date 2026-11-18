@@ -6,14 +6,6 @@ import {
   Ticket,
   Printer,
   RotateCw,
-  CheckCircle2,
-  Clock,
-  MapPin,
-  Calendar,
-  Building,
-  Users,
-  ShieldCheck,
-  AlertCircle,
   Loader2,
 } from "lucide-react";
 
@@ -57,9 +49,9 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
 
   if (isLoading && tickets.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center bg-[#131211] text-[#fcfaf6]">
-        <Loader2 className="w-10 h-10 text-[#ff4d2e] animate-spin mx-auto mb-3" />
-        <h2 className="font-headline text-xl font-bold text-white">Loading Digital Passes...</h2>
+      <div className="max-w-4xl mx-auto px-4 py-20 sm:py-24 text-center bg-[#131211] text-[#fcfaf6]">
+        <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 text-[#ff4d2e] animate-spin mx-auto mb-3" />
+        <h2 className="font-headline text-lg sm:text-xl font-bold text-white">Loading Digital Passes...</h2>
         <p className="text-xs text-stone-400 mt-1">Retrieving official QR admission passes from campus registry.</p>
       </div>
     );
@@ -67,11 +59,11 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
 
   if (!activeTicket) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-20 text-center bg-[#131211] text-[#fcfaf6]">
-        <div className="w-16 h-16 rounded-3xl bg-[#1e1b18] border-2 border-[#38332d] flex items-center justify-center text-stone-500 mx-auto mb-4">
-          <Ticket className="w-8 h-8" />
+      <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20 text-center bg-[#131211] text-[#fcfaf6]">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-[#1e1b18] border-2 border-[#38332d] flex items-center justify-center text-stone-500 mx-auto mb-3 sm:mb-4">
+          <Ticket className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
-        <h2 className="font-headline text-2xl font-bold text-white">No Active Event Passes Found</h2>
+        <h2 className="font-headline text-xl sm:text-2xl font-bold text-white">No Active Event Passes Found</h2>
         <p className="text-xs text-stone-400 mt-1.5 max-w-sm mx-auto">
           You haven't registered for any events yet. Explore events on the directory and register to claim your verified QR pass.
         </p>
@@ -87,50 +79,50 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
   }
 
   return (
-    <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 bg-[#131211] text-[#fcfaf6]">
+    <div className="max-w-6xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-6 sm:py-10 bg-[#131211] text-[#fcfaf6]">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
         <div>
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f59e0b]">
             Collegiate Ticket Stubs
           </span>
-          <h1 className="font-headline text-3xl font-extrabold text-white mt-1">
+          <h1 className="font-headline text-2xl sm:text-3xl font-extrabold text-white mt-1">
             My Digital Passes &amp; QR Credentials
           </h1>
-          <p className="text-sm text-stone-400 mt-1">
+          <p className="text-xs sm:text-sm text-stone-400 mt-1">
             Official collegiate admission credentials. Present the scannable QR code at the venue gate for instant check-in.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5 self-start sm:self-auto">
           <button
             onClick={fetchTickets}
             title="Refresh passes"
             disabled={isLoading}
-            className="flex items-center gap-1.5 bg-[#23201c] hover:bg-[#2c2824] text-stone-300 border-2 border-[#38332d] px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 bg-[#23201c] hover:bg-[#2c2824] text-stone-300 border-2 border-[#38332d] px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition-colors disabled:opacity-50"
           >
             <RotateCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
-            <span className="hidden sm:inline">Refresh</span>
+            <span>Refresh</span>
           </button>
 
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 bg-[#ff4d2e] hover:bg-[#e63d1e] text-white px-5 py-2.5 rounded-2xl text-xs font-bold transition-colors shadow-md shadow-[#ff4d2e]/20"
+            className="flex items-center gap-2 bg-[#ff4d2e] hover:bg-[#e63d1e] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition-colors shadow-md shadow-[#ff4d2e]/20"
           >
             <Printer className="w-4 h-4" />
-            <span>Print / Save Pass</span>
+            <span>Print Pass</span>
           </button>
         </div>
       </div>
 
-      {/* Ticket Selector Tabs (if multiple tickets) */}
+      {/* Ticket Selector Tabs (Horizontal Scrollable for mobile) */}
       {tickets.length > 1 && (
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-5 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-none">
           {tickets.map((t, idx) => (
             <button
               key={t.id || idx}
               onClick={() => setSelectedTicketIndex(idx)}
-              className={`px-4 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all border-2 ${
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl text-xs font-bold whitespace-nowrap transition-all border-2 shrink-0 ${
                 selectedTicketIndex === idx
                   ? "bg-[#ff4d2e] text-white border-[#ff4d2e] shadow-md"
                   : "bg-[#1a1815] text-stone-400 border-[#2c2824] hover:text-white"
@@ -142,20 +134,20 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
         </div>
       )}
 
-      {/* Retro Ticket Pass Card */}
-      <div className="max-w-4xl mx-auto bg-[#1a1815] border-2 border-[#38332d] rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 relative">
-        {/* Left 8 Cols */}
-        <div className="md:col-span-8 p-6 sm:p-8 flex flex-col justify-between gap-6 border-b-2 md:border-b-0 md:border-r-2 border-[#2b2723] relative">
+      {/* Retro Ticket Pass Card (Stack on mobile, 2-column on tablet/desktop) */}
+      <div className="max-w-4xl mx-auto bg-[#1a1815] border-2 border-[#38332d] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 relative">
+        {/* Left 8 Cols (Attendee & Event Details) */}
+        <div className="md:col-span-8 p-4 sm:p-8 flex flex-col justify-between gap-4 sm:gap-6 border-b-2 md:border-b-0 md:border-r-2 border-[#2b2723] relative">
           <div>
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f59e0b]/15 border border-[#f59e0b]/30 text-[#f59e0b] text-[11px] font-bold font-mono">
-                <span className="w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse"></span>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2 sm:mb-3">
+              <div className="flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#f59e0b]/15 border border-[#f59e0b]/30 text-[#f59e0b] text-[10px] sm:text-[11px] font-bold font-mono">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#f59e0b] animate-pulse"></span>
                 <span>UTSAVHUB ADMIT ONE PASS</span>
               </div>
-              <span className="text-xs font-mono text-stone-400 font-bold">{activeTicket.id}</span>
+              <span className="text-[11px] sm:text-xs font-mono text-stone-400 font-bold">{activeTicket.id}</span>
             </div>
 
-            <h2 className="font-headline text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 className="font-headline text-xl sm:text-3xl font-extrabold text-white leading-tight">
               {activeTicket.eventTitle}
             </h2>
             <p className="text-xs text-[#ff4d2e] font-bold mt-1">
@@ -163,43 +155,43 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
             </p>
           </div>
 
-          {/* Details Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 rounded-2xl bg-[#131211] border border-[#2b2723] text-xs">
+          {/* Details Grid (2 col on mobile, 3 col on sm+) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#131211] border border-[#2b2723] text-xs">
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Attendee
               </span>
               <span className="font-bold text-white mt-0.5 block truncate">
                 {activeTicket.attendeeName || user?.name}
               </span>
-              <span className="text-[10px] text-stone-400 font-mono">
+              <span className="text-[10px] text-stone-400 font-mono truncate block">
                 {activeTicket.rollNo || user?.rollNo}
               </span>
             </div>
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Department
               </span>
-              <span className="font-bold text-white mt-0.5 block">
+              <span className="font-bold text-white mt-0.5 block truncate">
                 {activeTicket.branch || user?.branch}
               </span>
-              <span className="text-[10px] text-stone-400 font-mono">
+              <span className="text-[10px] text-stone-400 font-mono truncate block">
                 {activeTicket.college || user?.college}
               </span>
             </div>
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Squad Info
               </span>
               <span className="font-bold text-[#f59e0b] mt-0.5 block truncate">
                 {activeTicket.teamName || "Individual Participant"}
               </span>
-              <span className="text-[10px] font-mono text-stone-400">
+              <span className="text-[10px] font-mono text-stone-400 block">
                 {activeTicket.teamMembers?.length ? `${activeTicket.teamMembers.length} Members` : "Solo"}
               </span>
             </div>
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Date
               </span>
               <span className="font-bold text-white mt-0.5 block">
@@ -207,7 +199,7 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
               </span>
             </div>
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Time
               </span>
               <span className="font-bold text-white mt-0.5 block">
@@ -215,37 +207,37 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
               </span>
             </div>
             <div>
-              <span className="text-stone-500 text-[10px] uppercase font-bold tracking-wider block font-mono">
+              <span className="text-stone-500 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider block font-mono">
                 Venue
               </span>
               <span className="font-bold text-white mt-0.5 block truncate">
-                {activeTicket.venue || "Campus Main Venue"}
+                {activeTicket.venue || "Campus Venue"}
               </span>
             </div>
           </div>
 
           {/* Payment Status Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#2b2723] text-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2.5 sm:pt-3 border-t border-[#2b2723] text-xs">
             <div className="flex items-center gap-2">
-              <span className="text-stone-400">Payment Status:</span>
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              <span className="text-stone-400 text-[11px] sm:text-xs">Payment:</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                 {activeTicket.feeStatus} ({activeTicket.feeAmount === 0 ? "Free" : `₹${activeTicket.feeAmount}`})
               </span>
             </div>
-            <span className="text-[11px] font-mono text-stone-400">
+            <span className="text-[10px] sm:text-[11px] font-mono text-stone-400 truncate max-w-[150px] sm:max-w-none">
               Token: {activeTicket.qrToken ? `${activeTicket.qrToken.slice(0, 16)}...` : activeTicket.id}
             </span>
           </div>
         </div>
 
-        {/* Right 4 Cols: REAL SCANNABLE QR CODE */}
-        <div className="md:col-span-4 p-6 sm:p-8 bg-[#161412] flex flex-col items-center justify-between gap-5 text-center">
+        {/* Right 4 Cols: Real QR Code Stamp */}
+        <div className="md:col-span-4 p-5 sm:p-8 bg-[#161412] flex flex-col items-center justify-between gap-4 text-center">
           <div>
-            <span className="text-[10px] uppercase tracking-widest font-extrabold text-stone-400 block mb-1 font-mono">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-extrabold text-stone-400 block mb-1 font-mono">
               Venue Check-In QR
             </span>
             <span
-              className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold font-mono ${
+              className={`inline-block px-2.5 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold font-mono ${
                 activeTicket.checkedIn
                   ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
                   : "bg-[#ff4d2e]/20 text-[#ff4d2e] border border-[#ff4d2e]/40"
@@ -257,26 +249,26 @@ export default function TicketPass({ tickets: propTickets = [], user }) {
             </span>
           </div>
 
-          {/* REAL QR CODE VIA qrcode.react */}
-          <div className="p-3.5 rounded-2xl bg-white shadow-xl flex items-center justify-center transition-transform hover:scale-105">
+          {/* Real QR Code via qrcode.react */}
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-white shadow-xl flex items-center justify-center transition-transform hover:scale-105">
             <QRCodeSVG
               value={activeTicket.qrToken || activeTicket.id}
-              size={154}
+              size={135}
               level="H"
               includeMargin={false}
             />
           </div>
 
           <div className="w-full">
-            <div className="p-2.5 rounded-xl bg-[#23201c] border border-[#38332d] text-center mb-2">
-              <span className="font-mono text-[11px] font-bold text-stone-200 block truncate">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-[#23201c] border border-[#38332d] text-center mb-1.5">
+              <span className="font-mono text-[10px] sm:text-[11px] font-bold text-stone-200 block truncate">
                 {activeTicket.qrToken || activeTicket.id}
               </span>
-              <span className="text-[9px] uppercase font-bold text-stone-500 tracking-wider">
+              <span className="text-[8px] sm:text-[9px] uppercase font-bold text-stone-500 tracking-wider">
                 Cryptographic Gate Signature
               </span>
             </div>
-            <p className="text-[10px] text-stone-500 leading-tight">
+            <p className="text-[9px] sm:text-[10px] text-stone-500 leading-tight">
               Present this pass at the gate. Organizer gate scanners decode this token to authenticate admission.
             </p>
           </div>
