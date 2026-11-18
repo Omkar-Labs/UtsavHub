@@ -8,11 +8,14 @@ import nodemailer from "nodemailer";
  * Generate it at: Google Account -> Security -> 2-Step Verification -> App Passwords
  */
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER || "omkartripathi36@gmail.com",
     pass: process.env.EMAIL_PASS, // 16-digit Google App Password
   },
+  family: 4, // Force IPv4 connection to prevent ENETUNREACH on Render
 });
 
 /**

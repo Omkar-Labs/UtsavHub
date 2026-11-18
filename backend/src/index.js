@@ -1,4 +1,9 @@
 import "dotenv/config";
+import dns from "node:dns";
+
+// Force Node.js DNS resolver to prioritize IPv4 over IPv6
+// Prevents ENETUNREACH errors on cloud hosting (e.g., Render) without IPv6 routes
+dns.setDefaultResultOrder("ipv4first");
 
 import dbConnect from "./Db/dbConnect.js";
 import { app } from "./app.js";
