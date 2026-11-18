@@ -1,2 +1,2 @@
-// Re-export sendVerificationEmail from nodemailer for backwards compatibility
-export { sendVerificationEmail } from "./nodemailer.js";
+// Re-export sendVerificationEmail from brevo.js
+export { sendVerificationEmail } from "./brevo.js";
