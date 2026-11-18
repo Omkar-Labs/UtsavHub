@@ -79,11 +79,9 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
       <header className="sticky top-0 z-50 border-b border-[#E4E2DD] bg-[#FAF9F6]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <img
-              src="/favicon.svg"
-              alt="UtsavHub Logo"
-              className="h-8 w-8 sm:h-9 sm:w-9 object-contain drop-shadow-sm"
-            />
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white border border-[#E4E2DD] shadow-sm text-lg sm:text-xl select-none">
+              🎪
+            </div>
             <span className="text-lg sm:text-xl font-bold tracking-tight text-[#18181B]">
               Utsav<span className="text-[#E11D48]">Hub</span>
             </span>

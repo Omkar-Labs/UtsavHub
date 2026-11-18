@@ -48,8 +48,8 @@ export default function Navbar({
           className="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0"
           onClick={() => setActiveTab(user?.role === "Admin" ? "admin_dashboard" : "home")}
         >
-          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-white border border-[#E4E2DD] flex items-center justify-center p-1.5 shadow-sm">
-            <img src="/favicon.svg" alt="UtsavHub Logo" className="w-full h-full object-contain" />
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-white border border-[#E4E2DD] flex items-center justify-center text-lg sm:text-2xl shadow-sm select-none">
+            🎪
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5 sm:gap-2">
