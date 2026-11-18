@@ -234,7 +234,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={role === "Student" ? "student@ietlucknow.ac.in" : "admin@ietlucknow.ac.in"}
+                    placeholder={role === "Student" ? "student@collegename.ac.in" : "admin@collegename.ac.in"}
                     className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] transition-colors"
                   />
                 </div>
@@ -267,7 +267,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       required
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
-                      placeholder="e.g. Omkar Tripathi"
+                      placeholder="Enter your full name"
                       className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
@@ -292,7 +292,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         required
                         value={rollNo}
                         onChange={(e) => setRollNo(e.target.value)}
-                        placeholder="2500520100142"
+                        placeholder="Enter your roll/ID number"
                         className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] font-mono"
                       />
                     </div>
@@ -420,7 +420,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       required
                       value={adminName}
                       onChange={(e) => setAdminName(e.target.value)}
-                      placeholder="e.g. Dr. Diksha Sharma"
+                      placeholder="Enter your full name"
                       className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
