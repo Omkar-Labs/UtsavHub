@@ -16,26 +16,26 @@ const EVENT_CATEGORIES = [
   {
     label: "Hackathons",
     icon: Code2,
-    gradient: "from-cyan-400 via-sky-400 to-blue-500",
-    glow: "bg-cyan-500/20 border-cyan-500/30 text-cyan-300",
+    gradient: "from-blue-600 via-indigo-600 to-violet-600",
+    glow: "bg-blue-50 border-blue-200 text-blue-600",
   },
   {
     label: "Cultural Fests",
     icon: Music,
-    gradient: "from-pink-400 via-rose-400 to-red-500",
-    glow: "bg-pink-500/20 border-pink-500/30 text-pink-300",
+    gradient: "from-[#E11D48] via-rose-500 to-red-600",
+    glow: "bg-rose-50 border-rose-200 text-[#E11D48]",
   },
   {
     label: "Sports Meets",
     icon: Trophy,
-    gradient: "from-amber-300 via-orange-400 to-red-500",
-    glow: "bg-amber-500/20 border-amber-500/30 text-amber-300",
+    gradient: "from-amber-600 via-orange-500 to-red-600",
+    glow: "bg-amber-50 border-amber-200 text-amber-700",
   },
   {
     label: "Tech Workshops",
     icon: Cpu,
-    gradient: "from-violet-400 via-purple-400 to-indigo-500",
-    glow: "bg-violet-500/20 border-violet-500/30 text-violet-300",
+    gradient: "from-purple-600 via-violet-600 to-indigo-600",
+    glow: "bg-purple-50 border-purple-200 text-purple-600",
   },
 ];
 
@@ -61,42 +61,44 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
   const ActiveIcon = current.icon;
 
   return (
-    <div className="relative min-h-screen bg-[#09090B] text-white overflow-hidden selection:bg-violet-500/30">
+    <div className="relative min-h-screen bg-[#FAF9F6] text-[#18181B] overflow-hidden selection:bg-[#FFE4E6] selection:text-[#E11D48]">
       {/* Ambient Radial Background Glows */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[350px] sm:h-[500px] w-[95vw] sm:w-[800px] rounded-full bg-violet-600/20 blur-[100px] sm:blur-[130px]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-[250px] sm:h-[400px] w-[300px] sm:w-[500px] rounded-full bg-cyan-500/10 blur-[80px] sm:blur-[120px]" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[350px] sm:h-[500px] w-[95vw] sm:w-[800px] rounded-full bg-[#E11D48]/5 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[250px] sm:h-[400px] w-[300px] sm:w-[500px] rounded-full bg-[#F43F5E]/5 blur-[100px]" />
 
       {/* Subtle Grid Pattern Overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(#18181B 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
 
       {/* Sticky Glassmorphic Navbar */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#09090B]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-[#E4E2DD] bg-[#FAF9F6]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-violet-600 to-cyan-500 font-bold text-white shadow-lg shadow-violet-500/25 text-sm sm:text-base">
-              U
-            </div>
-            <span className="text-lg sm:text-xl font-bold tracking-tight">
-              Utsav<span className="text-violet-400">Hub</span>
+            <img
+              src="/favicon.svg"
+              alt="UtsavHub Logo"
+              className="h-8 w-8 sm:h-9 sm:w-9 object-contain drop-shadow-sm"
+            />
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-[#18181B]">
+              Utsav<span className="text-[#E11D48]">Hub</span>
             </span>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={onAdminAuth}
-              className="rounded-lg px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-zinc-300 transition hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 border border-transparent"
             >
               Organiser
             </button>
             <button
               onClick={onStudentAuth}
-              className="rounded-lg bg-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 active:scale-95"
+              className="rounded-lg bg-[#18181B] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white transition hover:bg-zinc-800 active:scale-95 shadow-sm"
             >
               Student Login
             </button>
@@ -111,7 +113,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 py-1 text-[11px] sm:text-xs font-medium text-zinc-300 backdrop-blur-sm max-w-full truncate"
+          className="mb-6 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-[#E4E2DD] bg-white px-3 sm:px-4 py-1 text-[11px] sm:text-xs font-medium text-[#18181B] shadow-sm max-w-full truncate"
         >
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -127,7 +129,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight sm:leading-tight"
         >
-          <span className="block text-white">Discover &amp; Join Campus</span>
+          <span className="block text-[#18181B]">Discover &amp; Join Campus</span>
 
           {/* Dynamic Cycling Row with Morphing Icon */}
           <span className="my-1.5 sm:my-2 flex h-[1.35em] items-center justify-center overflow-hidden">
@@ -145,7 +147,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
                 className="inline-flex items-center gap-2 sm:gap-3 md:gap-4"
               >
                 <span
-                  className={`flex h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-xl sm:rounded-2xl border ${current.glow}`}
+                  className={`flex h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-xl sm:rounded-2xl border ${current.glow} shadow-sm`}
                 >
                   <ActiveIcon className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
                 </span>
@@ -158,7 +160,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
             </AnimatePresence>
           </span>
 
-          <span className="block text-white">&amp; Build Your Dream Squad.</span>
+          <span className="block text-[#18181B]">&amp; Build Your Dream Squad.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -166,10 +168,10 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-zinc-400 px-2"
+          className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-zinc-600 px-2"
         >
           Explore intra- and inter-college events, match automatically with solo
-          teammates via <span className="text-zinc-200 font-medium">Team Maker</span>,
+          teammates via <span className="text-[#18181B] font-semibold">Team Maker</span>,
           and unlock instant QR gate passes—all verified with your college credentials.
         </motion.p>
 
@@ -182,7 +184,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
         >
           <button
             onClick={onStudentAuth}
-            className="w-full sm:w-auto group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 sm:px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-violet-600/25 transition hover:opacity-95 active:scale-95"
+            className="w-full sm:w-auto group flex items-center justify-center gap-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] px-6 sm:px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md shadow-[#E11D48]/20 transition hover:opacity-95 active:scale-95"
           >
             <span>Explore Campus Events</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -190,9 +192,9 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
 
           <button
             onClick={onAdminAuth}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 sm:px-7 py-3.5 text-sm sm:text-base font-semibold text-zinc-200 backdrop-blur-sm transition hover:border-white/30 hover:bg-white/10 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-zinc-300 bg-white hover:bg-zinc-50 px-6 sm:px-7 py-3.5 text-sm sm:text-base font-semibold text-zinc-800 transition active:scale-95 shadow-sm"
           >
-            <Sparkles className="h-4 w-4 text-violet-400" />
+            <Sparkles className="h-4 w-4 text-[#E11D48]" />
             <span>Host a College Event</span>
           </button>
         </motion.div>
@@ -207,7 +209,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
           >
             <button
               onClick={onExploreGuest}
-              className="text-xs text-zinc-400 hover:text-white underline underline-offset-4 transition-colors"
+              className="text-xs text-zinc-500 hover:text-zinc-900 underline underline-offset-4 transition-colors"
             >
               Or preview event directory as guest
             </button>
@@ -221,16 +223,16 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
           transition={{ duration: 0.6, delay: 0.45 }}
           className="mt-12 sm:mt-16 grid w-full max-w-3xl grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-left sm:text-center"
         >
-          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-xs sm:text-sm text-zinc-300">
-            <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-[#E4E2DD] bg-white px-4 py-3 text-xs sm:text-sm text-zinc-700 shadow-sm">
+            <ShieldCheck className="h-4 w-4 text-[#047857] shrink-0" />
             <span>College Domain Verified</span>
           </div>
-          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-xs sm:text-sm text-zinc-300">
-            <Users className="h-4 w-4 text-cyan-400 shrink-0" />
+          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-[#E4E2DD] bg-white px-4 py-3 text-xs sm:text-sm text-zinc-700 shadow-sm">
+            <Users className="h-4 w-4 text-[#E11D48] shrink-0" />
             <span>Auto Solo-to-Team Match</span>
           </div>
-          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-xs sm:text-sm text-zinc-300">
-            <QrCode className="h-4 w-4 text-violet-400 shrink-0" />
+          <div className="flex items-center sm:justify-center gap-2.5 rounded-xl border border-[#E4E2DD] bg-white px-4 py-3 text-xs sm:text-sm text-zinc-700 shadow-sm">
+            <QrCode className="h-4 w-4 text-zinc-900 shrink-0" />
             <span>Instant QR Gate Entry</span>
           </div>
         </motion.div>
@@ -249,7 +251,7 @@ export default function LandingHero({ onStudentAuth, onAdminAuth, onExploreGuest
             {VERIFIED_DOMAINS.map((domain) => (
               <span
                 key={domain}
-                className="rounded-full border border-white/10 bg-zinc-900/80 px-2.5 sm:px-3 py-1 font-mono text-[10px] sm:text-xs text-zinc-400"
+                className="rounded-full border border-[#E4E2DD] bg-white px-2.5 sm:px-3 py-1 font-mono text-[10px] sm:text-xs text-zinc-700 shadow-sm"
               >
                 {domain}
               </span>

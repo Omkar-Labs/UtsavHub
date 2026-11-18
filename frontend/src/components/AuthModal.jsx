@@ -149,15 +149,15 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto">
-        {/* Retro Header Accent Bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#ff4d2e] via-[#f59e0b] to-[#10b981]"></div>
+    <div className="fixed inset-0 z-50 bg-zinc-900/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white border border-[#E4E2DD] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-xl relative max-h-[92vh] overflow-y-auto text-[#18181B]">
+        {/* Header Accent Bar */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#E11D48] to-[#F43F5E]"></div>
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors"
+          className="absolute right-4 top-4 p-1.5 rounded-xl text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -165,14 +165,14 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
         {/* Modal Header */}
         <div className="mb-4 sm:mb-6 pt-1 sm:pt-2">
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#ff4d2e]/15 border border-[#ff4d2e]/30 text-[#ff4d2e] font-mono text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
-              Retro Campus Gate
+            <span className="px-2.5 py-0.5 rounded-full bg-[#FFE4E6] border border-[#FECDD3] text-[#E11D48] font-mono text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
+              Collegiate Campus Gate
             </span>
           </div>
-          <h2 className="font-headline text-2xl sm:text-3xl font-extrabold text-[#fcfaf6] tracking-tight">
+          <h2 className="font-headline text-2xl sm:text-3xl font-extrabold text-[#18181B] tracking-tight">
             {isSignUp ? `Create ${role} Account` : `Sign In as ${role}`}
           </h2>
-          <p className="text-xs text-stone-400 mt-1">
+          <p className="text-xs text-zinc-500 mt-1">
             {isSignUp
               ? "Register with your verified college credentials to join events and squad matchmaker."
               : "Enter your registered credentials to access your live portal."}
@@ -180,7 +180,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
         </div>
 
         {/* Role Toggle Tabs */}
-        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1 sm:p-1.5 bg-[#131211] rounded-xl sm:rounded-2xl border border-[#2b2723] mb-4 sm:mb-6">
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1 sm:p-1.5 bg-[#F3F1EC] rounded-xl sm:rounded-2xl border border-[#E4E2DD] mb-4 sm:mb-6">
           <button
             type="button"
             onClick={() => {
@@ -188,7 +188,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
               setErrorMessage("");
             }}
             className={`py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-              role === "Student" ? "bg-[#ff4d2e] text-white shadow-md" : "text-stone-400 hover:text-white"
+              role === "Student" ? "bg-[#E11D48] text-white shadow-sm" : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <span className="material-symbols-outlined text-sm sm:text-base">school</span>
@@ -202,7 +202,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
               setErrorMessage("");
             }}
             className={`py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-              role === "Admin" ? "bg-[#f59e0b] text-stone-950 shadow-md font-extrabold" : "text-stone-400 hover:text-white"
+              role === "Admin" ? "bg-[#18181B] text-white shadow-sm font-extrabold" : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <span className="material-symbols-outlined text-sm sm:text-base">admin_panel_settings</span>
@@ -212,8 +212,8 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
 
         {/* Error notification */}
         {errorMessage && (
-          <div className="mb-4 p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 shrink-0 text-red-400" />
+          <div className="mb-4 p-3 rounded-xl bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs flex items-center gap-2">
+            <ShieldAlert className="w-4 h-4 shrink-0 text-[#E11D48]" />
             <span className="leading-tight">{errorMessage}</span>
           </div>
         )}
@@ -224,33 +224,33 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           {!isSignUp ? (
             <>
               <div>
-                <label className="block font-semibold text-stone-300 mb-1 sm:mb-1.5">
+                <label className="block font-semibold text-zinc-700 mb-1 sm:mb-1.5">
                   {role === "Student" ? "College Student Email" : "Official Faculty / Admin Email"}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 w-4 h-4" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={role === "Student" ? "student@ietlucknow.ac.in" : "admin@ietlucknow.ac.in"}
-                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
+                    className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-stone-300 mb-1 sm:mb-1.5">Password</label>
+                <label className="block font-semibold text-zinc-700 mb-1 sm:mb-1.5">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 w-4 h-4" />
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
                   <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-[#23201c] border border-[#38332d] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-white placeholder:text-stone-500 focus:outline-none focus:border-[#ff4d2e] transition-colors"
+                    className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl pl-10 pr-4 py-2.5 sm:py-3 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] transition-colors"
                   />
                 </div>
               </div>
@@ -261,54 +261,54 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
               {role === "Student" ? (
                 <>
                   <div>
-                    <label className="block font-semibold text-stone-300 mb-1">Student Full Name *</label>
+                    <label className="block font-semibold text-zinc-700 mb-1">Student Full Name *</label>
                     <input
                       type="text"
                       required
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
                       placeholder="e.g. Omkar Tripathi"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">College Email *</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">College Email *</label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="roll@ietlucknow.ac.in"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">Roll / ID Number *</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">Roll / ID Number *</label>
                       <input
                         type="text"
                         required
                         value={rollNo}
                         onChange={(e) => setRollNo(e.target.value)}
                         placeholder="2500520100142"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e] font-mono"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] font-mono"
                       />
                     </div>
                   </div>
 
                   {/* OTP Row */}
-                  <div className="p-2.5 sm:p-3 bg-[#131211] border border-[#38332d] rounded-xl">
+                  <div className="p-2.5 sm:p-3 bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl">
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="block font-semibold text-stone-300">
+                      <label className="block font-semibold text-zinc-700">
                         Email OTP Code *
                       </label>
                       <button
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isSendingOtp || otpCountdown > 0}
-                        className="text-[10px] sm:text-[11px] font-bold text-[#ff4d2e] hover:text-[#ff6a50] disabled:text-stone-500 transition-colors flex items-center gap-1"
+                        className="text-[10px] sm:text-[11px] font-bold text-[#E11D48] hover:text-[#BE123C] disabled:text-zinc-400 transition-colors flex items-center gap-1"
                       >
                         {isSendingOtp ? (
                           <>
@@ -325,7 +325,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       </button>
                     </div>
                     <div className="relative">
-                      <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 w-4 h-4" />
+                      <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
                       <input
                         type="text"
                         required
@@ -333,13 +333,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         placeholder="6-digit OTP code"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-lg pl-9 pr-3 py-2 text-white font-mono tracking-widest text-sm focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-white border border-[#E4E2DD] rounded-lg pl-9 pr-3 py-2 text-[#18181B] font-mono tracking-widest text-sm focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-stone-300 mb-1">Create Password *</label>
+                    <label className="block font-semibold text-zinc-700 mb-1">Create Password *</label>
                     <input
                       type="password"
                       required
@@ -347,20 +347,20 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Minimum 6 characters"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">College</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">College</label>
                       <select
                         value={selectedCollege}
                         onChange={(e) => setSelectedCollege(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-[#18181B] focus:outline-none focus:border-[#E11D48]"
                       >
                         {collegesList.map((c) => (
-                          <option key={c.id} value={c.name} className="bg-[#1a1815]">
+                          <option key={c.id} value={c.name} className="bg-white text-zinc-900">
                             {c.name}
                           </option>
                         ))}
@@ -368,45 +368,45 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">Department</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">Department</label>
                       <select
                         value={branch}
                         onChange={(e) => setBranch(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-[#18181B] focus:outline-none focus:border-[#E11D48]"
                       >
-                        <option value="CSE" className="bg-[#1a1815]">CSE</option>
-                        <option value="IT" className="bg-[#1a1815]">IT</option>
-                        <option value="ECE" className="bg-[#1a1815]">ECE</option>
-                        <option value="EE" className="bg-[#1a1815]">EE</option>
-                        <option value="ME" className="bg-[#1a1815]">ME</option>
-                        <option value="CE" className="bg-[#1a1815]">CE</option>
+                        <option value="CSE" className="bg-white text-zinc-900">CSE</option>
+                        <option value="IT" className="bg-white text-zinc-900">IT</option>
+                        <option value="ECE" className="bg-white text-zinc-900">ECE</option>
+                        <option value="EE" className="bg-white text-zinc-900">EE</option>
+                        <option value="ME" className="bg-white text-zinc-900">ME</option>
+                        <option value="CE" className="bg-white text-zinc-900">CE</option>
                       </select>
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">
-                        Gender <span className="text-[#f59e0b] font-normal">(Diversity)</span>
+                      <label className="block font-semibold text-zinc-700 mb-1">
+                        Gender <span className="text-[#C2410C] font-normal">(Diversity)</span>
                       </label>
                       <select
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-[#18181B] focus:outline-none focus:border-[#E11D48]"
                       >
-                        <option value="Male" className="bg-[#1a1815]">Male</option>
-                        <option value="Female" className="bg-[#1a1815]">Female</option>
-                        <option value="Other" className="bg-[#1a1815]">Other</option>
+                        <option value="Male" className="bg-white text-zinc-900">Male</option>
+                        <option value="Female" className="bg-white text-zinc-900">Female</option>
+                        <option value="Other" className="bg-white text-zinc-900">Other</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-stone-300 mb-1">Skills (Comma-separated)</label>
+                    <label className="block font-semibold text-zinc-700 mb-1">Skills (Comma-separated)</label>
                     <input
                       type="text"
                       value={skills}
                       onChange={(e) => setSkills(e.target.value)}
                       placeholder="e.g. React, Node.js, UI/UX"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#ff4d2e]"
+                      className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
                 </>
@@ -414,20 +414,20 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                 /* Admin Sign Up */
                 <>
                   <div>
-                    <label className="block font-semibold text-stone-300 mb-1">Faculty / Organizer Full Name *</label>
+                    <label className="block font-semibold text-zinc-700 mb-1">Faculty / Organizer Full Name *</label>
                     <input
                       type="text"
                       required
                       value={adminName}
                       onChange={(e) => setAdminName(e.target.value)}
                       placeholder="e.g. Dr. Diksha Sharma"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                      className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">College Name</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">College Name</label>
                       <select
                         value={adminCollege}
                         onChange={(e) => {
@@ -435,10 +435,10 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                           const found = collegesList.find((c) => c.name === e.target.value);
                           if (found) setCollegeDomain(found.domain);
                         }}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-2.5 sm:px-3.5 py-2 sm:py-2.5 text-[#18181B] focus:outline-none focus:border-[#E11D48]"
                       >
                         {collegesList.map((c) => (
-                          <option key={c.id} value={c.name} className="bg-[#1a1815]">
+                          <option key={c.id} value={c.name} className="bg-white text-zinc-900">
                             {c.name}
                           </option>
                         ))}
@@ -446,33 +446,33 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">College Domain *</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">College Domain *</label>
                       <input
                         type="text"
                         required
                         value={collegeDomain}
                         onChange={(e) => setCollegeDomain(e.target.value)}
                         placeholder="ietlucknow.ac.in"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] font-mono"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">Admin Email *</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">Admin Email *</label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder={`admin@${collegeDomain}`}
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b] font-mono"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] font-mono"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-stone-300 mb-1">Create Password *</label>
+                      <label className="block font-semibold text-zinc-700 mb-1">Create Password *</label>
                       <input
                         type="password"
                         required
@@ -480,22 +480,22 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••••••"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                        className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                       />
                     </div>
                   </div>
 
                   {/* Admin OTP */}
-                  <div className="p-2.5 sm:p-3 bg-[#131211] border border-[#38332d] rounded-xl">
+                  <div className="p-2.5 sm:p-3 bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl">
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="block font-semibold text-stone-300">
+                      <label className="block font-semibold text-zinc-700">
                         Admin Email OTP *
                       </label>
                       <button
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isSendingOtp || otpCountdown > 0}
-                        className="text-[10px] sm:text-[11px] font-bold text-[#f59e0b] hover:text-[#fbbf24] disabled:text-stone-500 transition-colors flex items-center gap-1"
+                        className="text-[10px] sm:text-[11px] font-bold text-[#E11D48] hover:text-[#BE123C] disabled:text-zinc-400 transition-colors flex items-center gap-1"
                       >
                         {isSendingOtp ? (
                           <>
@@ -512,7 +512,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                       </button>
                     </div>
                     <div className="relative">
-                      <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 w-4 h-4" />
+                      <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
                       <input
                         type="text"
                         required
@@ -520,24 +520,24 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         placeholder="6-digit OTP code"
-                        className="w-full bg-[#23201c] border border-[#38332d] rounded-lg pl-9 pr-3 py-2 text-white font-mono tracking-widest text-sm focus:outline-none focus:border-[#f59e0b]"
+                        className="w-full bg-white border border-[#E4E2DD] rounded-lg pl-9 pr-3 py-2 text-[#18181B] font-mono tracking-widest text-sm focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-stone-300 mb-1">Leadership Designation *</label>
+                    <label className="block font-semibold text-zinc-700 mb-1">Leadership Designation *</label>
                     <input
                       type="text"
                       required
                       value={designation}
                       onChange={(e) => setDesignation(e.target.value)}
                       placeholder="e.g. Faculty Convener, Tech Council Head"
-                      className="w-full bg-[#23201c] border border-[#38332d] rounded-xl px-3.5 py-2 sm:py-2.5 text-white focus:outline-none focus:border-[#f59e0b]"
+                      className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl px-3.5 py-2 sm:py-2.5 text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48]"
                     />
                   </div>
 
-                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b] text-[10px] sm:text-[11px] leading-relaxed">
+                  <div className="p-2.5 sm:p-3 rounded-xl bg-[#FFF7ED] border border-[#FED7AA] text-[#C2410C] text-[10px] sm:text-[11px] leading-relaxed">
                     <span className="font-bold">Quota Notice:</span> Maximum 2 Admin accounts permitted per institution domain to prevent unauthorized access.
                   </div>
                 </>
@@ -549,10 +549,10 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full py-3 sm:py-3.5 rounded-xl font-bold text-xs tracking-wide shadow-lg transition-all duration-200 mt-2 flex items-center justify-center gap-2 ${
+            className={`w-full py-3 sm:py-3.5 rounded-xl font-bold text-xs tracking-wide shadow-sm transition-all duration-200 mt-2 flex items-center justify-center gap-2 ${
               role === "Student"
-                ? "bg-[#ff4d2e] hover:bg-[#e63d1e] text-white disabled:opacity-50"
-                : "bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 font-extrabold disabled:opacity-50"
+                ? "bg-[#E11D48] hover:bg-[#BE123C] text-white disabled:opacity-50"
+                : "bg-[#18181B] hover:bg-zinc-800 text-white font-extrabold disabled:opacity-50"
             }`}
           >
             {isSubmitting ? (
@@ -569,26 +569,26 @@ export default function AuthModal({ isOpen, onClose, initialRole = "Student", on
         </form>
 
         {/* Switch Sign In / Up */}
-        <div className="mt-4 sm:mt-5 text-center pt-3 border-t border-[#2b2723]">
+        <div className="mt-4 sm:mt-5 text-center pt-3 border-t border-[#E4E2DD]">
           <button
             type="button"
             onClick={() => {
               setIsSignUp(!isSignUp);
               setErrorMessage("");
             }}
-            className="text-xs text-stone-400 hover:text-white transition-colors"
+            className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors"
           >
             {isSignUp ? (
               <span>
                 Already registered?{" "}
-                <strong className="text-[#ff4d2e] underline underline-offset-2">
+                <strong className="text-[#E11D48] underline underline-offset-2">
                   Sign In with Email &amp; Password
                 </strong>
               </span>
             ) : (
               <span>
                 New student or organizer?{" "}
-                <strong className="text-[#ff4d2e] underline underline-offset-2">
+                <strong className="text-[#E11D48] underline underline-offset-2">
                   Create New Account
                 </strong>
               </span>

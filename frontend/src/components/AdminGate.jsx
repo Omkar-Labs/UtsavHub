@@ -230,18 +230,18 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
   const seatCap = currentEvent.seatLimit || 100;
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-6 sm:py-10 bg-[#131211] text-[#fcfaf6]">
+    <div className="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-6 sm:py-10 bg-[#FAF9F6] text-[#18181B]">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#f59e0b] mb-1">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#C2410C] mb-1">
             <ShieldCheck className="w-4 h-4" />
             <span>Organizer Console • {user?.college || "Campus Node"}</span>
           </div>
-          <h1 className="font-headline text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h1 className="font-headline text-2xl sm:text-3xl font-extrabold text-[#18181B] tracking-tight">
             {viewMode === "scanner" ? "Gate QR Scanner Terminal" : "Admin Operations & Analytics"}
           </h1>
-          <p className="text-xs sm:text-sm text-stone-400 mt-1 max-w-2xl">
+          <p className="text-xs sm:text-sm text-zinc-600 mt-1 max-w-2xl">
             {viewMode === "scanner"
               ? "Scan attendee digital QR passes at the entrance checkpoint with automated duplicate access detection."
               : "Audit registrations, view live fee collections, monitor attendee rosters, and export accreditation lists."}
@@ -256,10 +256,10 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
               setSelectedEventId(e.target.value);
               setScanResult(null);
             }}
-            className="bg-[#1a1815] border-2 border-[#2c2824] text-xs text-white rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-2.5 font-bold focus:outline-none focus:border-[#f59e0b] flex-1 sm:flex-none truncate"
+            className="bg-white border border-[#E4E2DD] text-xs text-zinc-800 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-2.5 font-bold focus:outline-none focus:border-[#E11D48] flex-1 sm:flex-none truncate shadow-sm"
           >
             {events.map((ev) => (
-              <option key={ev._id || ev.id} value={ev._id || ev.id}>
+              <option key={ev._id || ev.id} value={ev._id || ev.id} className="bg-white text-zinc-900">
                 {ev.eventName || ev.title}
               </option>
             ))}
@@ -269,16 +269,16 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
             onClick={fetchAttendeesData}
             title="Refresh Live Data"
             disabled={isLoading}
-            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border-2 border-[#38332d] text-stone-300 transition-colors"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F3F1EC] border border-[#E4E2DD] text-zinc-700 transition-colors shadow-sm"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
           </button>
 
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 bg-[#23201c] hover:bg-[#2c2824] text-stone-200 border-2 border-[#38332d] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition-colors shrink-0"
+            className="flex items-center gap-1.5 bg-white hover:bg-[#F3F1EC] text-zinc-800 border border-[#E4E2DD] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition-colors shrink-0 shadow-sm"
           >
-            <Download className="w-4 h-4 text-[#10b981]" />
+            <Download className="w-4 h-4 text-[#047857]" />
             <span>Export CSV</span>
           </button>
         </div>
@@ -286,72 +286,72 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
 
       {/* Telemetry Stats Bar (2 col on mobile, 4 col on md+) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
-        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-[#E4E2DD] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider font-mono">
               Total Registered
             </span>
-            <div className="font-headline text-xl sm:text-3xl font-extrabold text-white mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#18181B] mt-1">
               {stats.totalRegistered}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-stone-400">Cap: {seatCap}</span>
+            <span className="text-[10px] sm:text-[11px] text-zinc-500">Cap: {seatCap}</span>
           </div>
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#ff4d2e]/15 text-[#ff4d2e] flex items-center justify-center font-bold">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center font-bold">
             <Users className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-[#E4E2DD] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider font-mono">
               Paid Registrations
             </span>
-            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#f59e0b] mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#C2410C] mt-1">
               {stats.totalPaid}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-stone-400">
+            <span className="text-[10px] sm:text-[11px] text-zinc-500">
               ₹{stats.totalRevenue.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#f59e0b]/15 text-[#f59e0b] flex items-center justify-center font-bold">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center font-bold">
             <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-[#E4E2DD] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider font-mono">
               Gate Check-Ins
             </span>
-            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#10b981] mt-1">
+            <div className="font-headline text-xl sm:text-3xl font-extrabold text-[#047857] mt-1">
               {stats.totalCheckedIn}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-stone-400">
+            <span className="text-[10px] sm:text-[11px] text-zinc-500">
               {stats.totalRegistered > 0
                 ? `${Math.round((stats.totalCheckedIn / stats.totalRegistered) * 100)}% Verified`
                 : "0%"}
             </span>
           </div>
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#10b981]/15 text-[#10b981] flex items-center justify-center font-bold">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#ECFDF5] text-[#047857] flex items-center justify-center font-bold">
             <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#1a1815] border-2 border-[#2c2824] shadow-sm flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-[#E4E2DD] shadow-sm flex items-center justify-between">
           <div>
-            <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider font-mono">
               Participation
             </span>
-            <div className="font-headline text-sm sm:text-lg font-extrabold text-white mt-1">
+            <div className="font-headline text-sm sm:text-lg font-extrabold text-[#18181B] mt-1">
               {currentEvent.eventType === "Team"
                 ? `Squad ${currentEvent.minTeamSize}-${currentEvent.maxTeamSize}`
                 : "Solo Entry"}
             </div>
-            <span className="text-[10px] sm:text-[11px] text-stone-400 truncate block max-w-[100px] sm:max-w-[120px]">
+            <span className="text-[10px] sm:text-[11px] text-zinc-500 truncate block max-w-[100px] sm:max-w-[120px]">
               {currentEvent.category || "General"}
             </span>
           </div>
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#23201c] text-stone-300 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-zinc-100 text-zinc-700 flex items-center justify-center font-bold">
             <Building className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
@@ -363,19 +363,19 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         <div
           className={`${
             viewMode === "scanner" ? "lg:col-span-7" : "lg:col-span-5"
-          } bg-[#1a1815] border-2 border-[#2c2824] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl`}
+          } bg-white border border-[#E4E2DD] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-sm`}
         >
           <div className="flex items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#10b981] animate-ping"></div>
-              <h2 className="font-headline text-lg sm:text-xl font-bold text-white">Live Gate Scanner Terminal</h2>
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#047857] animate-ping"></div>
+              <h2 className="font-headline text-lg sm:text-xl font-bold text-[#18181B]">Live Gate Scanner Terminal</h2>
             </div>
             <button
               onClick={toggleCamera}
               className={`p-1.5 sm:p-2 rounded-xl border text-[11px] sm:text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0 ${
                 cameraActive
-                  ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                  : "bg-[#23201c] hover:bg-[#2c2824] text-stone-300 border-[#38332d]"
+                  ? "bg-[#FFE4E6] text-[#BE123C] border-[#FECDD3]"
+                  : "bg-white hover:bg-[#F3F1EC] text-zinc-700 border-[#E4E2DD] shadow-sm"
               }`}
             >
               <Camera className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -383,16 +383,16 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
             </button>
           </div>
 
-          <p className="text-xs text-stone-400 mb-4">
+          <p className="text-xs text-zinc-600 mb-4">
             Decode QR passes or input ticket tokens to record admission attendance and block duplicate entry attempts.
           </p>
 
           {/* Camera Viewport */}
           {cameraActive && (
-            <div className="relative mb-4 sm:mb-5 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#ff4d2e] bg-black h-48 sm:h-56 flex items-center justify-center">
+            <div className="relative mb-4 sm:mb-5 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#E11D48] bg-black h-48 sm:h-56 flex items-center justify-center">
               <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
-              <div className="absolute inset-0 border-2 border-dashed border-[#10b981]/70 m-4 sm:m-6 rounded-xl pointer-events-none flex items-center justify-center">
-                <span className="text-[10px] font-mono font-bold text-[#10b981] bg-black/70 px-2 py-0.5 rounded">
+              <div className="absolute inset-0 border-2 border-dashed border-[#047857]/70 m-4 sm:m-6 rounded-xl pointer-events-none flex items-center justify-center">
+                <span className="text-[10px] font-mono font-bold text-[#047857] bg-black/70 px-2 py-0.5 rounded">
                   ALIGN QR PASS IN RETICLE
                 </span>
               </div>
@@ -400,7 +400,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
           )}
 
           {cameraError && (
-            <div className="mb-4 p-3 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs flex items-center gap-2">
+            <div className="mb-4 p-3 rounded-xl bg-[#FFF7ED] border border-[#FED7AA] text-[#C2410C] text-xs flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{cameraError}</span>
             </div>
@@ -408,7 +408,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
 
           <form onSubmit={handleScanSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-stone-300 mb-1.5">
+              <label className="block text-xs font-semibold text-zinc-800 mb-1.5">
                 Ticket Token / QR Payload *
               </label>
               <div className="relative">
@@ -418,12 +418,12 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                   value={scanInput}
                   onChange={(e) => setScanInput(e.target.value)}
                   placeholder="e.g. UTSV-QR-... or TKT-2026-..."
-                  className="w-full bg-[#23201c] border border-[#38332d] rounded-xl sm:rounded-2xl pl-3.5 pr-20 sm:pr-24 py-2.5 sm:py-3 text-xs text-white placeholder:text-stone-500 focus:outline-none focus:border-[#f59e0b] font-mono"
+                  className="w-full bg-[#FAF9F6] border border-[#E4E2DD] rounded-xl sm:rounded-2xl pl-3.5 pr-20 sm:pr-24 py-2.5 sm:py-3 text-xs text-[#18181B] placeholder:text-zinc-400 focus:outline-none focus:border-[#E11D48] focus:ring-1 focus:ring-[#E11D48] font-mono"
                 />
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-xl bg-[#f59e0b] hover:bg-[#d97706] text-stone-950 text-xs font-extrabold transition-colors disabled:opacity-50 flex items-center gap-1.5"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-xl bg-[#E11D48] hover:bg-[#BE123C] text-white text-xs font-bold transition-colors disabled:opacity-50 flex items-center gap-1.5 shadow-sm"
                 >
                   {isVerifying ? (
                     <>
@@ -440,8 +440,8 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
 
           {/* Quick simulation pills from registered attendees */}
           {attendees.length > 0 && (
-            <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-[#2b2723]">
-              <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 block mb-2 font-mono">
+            <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-[#E4E2DD]">
+              <span className="text-[10px] sm:text-[11px] font-bold text-zinc-500 block mb-2 font-mono">
                 Click Attendee to Simulate Live Gate Scan:
               </span>
               <div className="flex flex-col gap-2 max-h-44 sm:max-h-48 overflow-y-auto">
@@ -449,17 +449,19 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                   <button
                     key={a._id}
                     onClick={() => simulateScan(a.qrToken || a.ticketId)}
-                    className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#23201c] hover:bg-[#2c2824] border border-[#38332d] text-left text-xs text-stone-300 flex items-center justify-between transition-colors"
+                    className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#FAF9F6] hover:bg-zinc-100 border border-[#E4E2DD] text-left text-xs text-zinc-800 flex items-center justify-between transition-colors shadow-sm"
                   >
                     <div className="truncate">
-                      <span className="font-bold text-white">{a.student?.name}</span>
-                      <span className="text-[10px] sm:text-[11px] text-stone-400 ml-1.5 font-mono">
+                      <span className="font-bold text-[#18181B]">{a.student?.name}</span>
+                      <span className="text-[10px] sm:text-[11px] text-zinc-500 ml-1.5 font-mono">
                         ({a.ticketId})
                       </span>
                     </div>
                     <span
-                      className={`text-[9px] sm:text-[10px] font-mono font-bold shrink-0 ml-2 px-2 py-0.5 rounded ${
-                        a.checkedIn ? "bg-emerald-500/20 text-emerald-300" : "bg-[#f59e0b]/20 text-[#f59e0b]"
+                      className={`text-[9px] sm:text-[10px] font-mono font-bold shrink-0 ml-2 px-2 py-0.5 rounded border ${
+                        a.checkedIn
+                          ? "bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]"
+                          : "bg-[#FFF7ED] text-[#C2410C] border-[#FED7AA]"
                       }`}
                     >
                       {a.checkedIn ? "Checked In" : "Scan Code"}
@@ -473,12 +475,12 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
           {/* Scan Result Feedback Alert */}
           {scanResult && (
             <div
-              className={`mt-4 sm:mt-6 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-xs animate-slide-in ${
+              className={`mt-4 sm:mt-6 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border text-xs animate-slide-in ${
                 scanResult.status === "valid"
-                  ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
+                  ? "bg-[#ECFDF5] border-[#A7F3D0] text-[#047857]"
                   : scanResult.status === "duplicate"
-                  ? "bg-amber-500/15 border-amber-500/40 text-amber-300"
-                  : "bg-red-500/15 border-red-500/40 text-red-300"
+                  ? "bg-[#FFF7ED] border-[#FED7AA] text-[#C2410C]"
+                  : "bg-[#FFE4E6] border-[#FECDD3] text-[#BE123C]"
               }`}
             >
               <div className="flex items-center gap-2 font-extrabold text-xs sm:text-sm mb-1">
@@ -491,7 +493,7 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
               </div>
               <p className="leading-relaxed text-[11px]">{scanResult.message}</p>
               {scanResult.ticket && (
-                <div className="mt-2 pt-2 border-t border-emerald-500/30 flex items-center justify-between text-[10px] font-mono">
+                <div className="mt-2 pt-2 border-t border-[#A7F3D0] flex items-center justify-between text-[10px] font-mono">
                   <span>Pass: {scanResult.ticket.id}</span>
                   <span>Time: {scanResult.ticket.checkedInAt}</span>
                 </div>
@@ -504,16 +506,16 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
         <div
           className={`${
             viewMode === "scanner" ? "lg:col-span-5" : "lg:col-span-7"
-          } bg-[#1a1815] border-2 border-[#2c2824] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl`}
+          } bg-white border border-[#E4E2DD] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-sm`}
         >
           <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <h2 className="font-headline text-lg sm:text-xl font-bold text-white">Live Attendee Roster</h2>
-            <span className="text-[11px] sm:text-xs text-stone-400 font-mono">{attendees.length} Verified Records</span>
+            <h2 className="font-headline text-lg sm:text-xl font-bold text-[#18181B]">Live Attendee Roster</h2>
+            <span className="text-[11px] sm:text-xs text-zinc-500 font-mono">{attendees.length} Verified Records</span>
           </div>
 
           <div className="overflow-x-auto max-h-[520px] overflow-y-auto -mx-2 sm:mx-0">
-            <table className="w-full text-left text-xs text-stone-300 min-w-[480px]">
-              <thead className="sticky top-0 bg-[#23201c] text-[9px] sm:text-[10px] uppercase tracking-wider text-stone-400 border-b border-[#38332d] font-mono z-10">
+            <table className="w-full text-left text-xs text-zinc-700 min-w-[480px]">
+              <thead className="sticky top-0 bg-[#F3F1EC] text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-600 border-b border-[#E4E2DD] font-mono z-10">
                 <tr>
                   <th className="py-2.5 px-3">Attendee</th>
                   <th className="py-2.5 px-3">Roll &amp; Branch</th>
@@ -522,42 +524,42 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                   <th className="py-2.5 px-3">Gate Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#2b2723]">
+              <tbody className="divide-y divide-[#E4E2DD]">
                 {isLoading && attendees.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-stone-500">
-                      <Loader2 className="w-5 h-5 animate-spin mx-auto mb-1 text-[#f59e0b]" />
+                    <td colSpan={5} className="py-8 text-center text-zinc-500">
+                      <Loader2 className="w-5 h-5 animate-spin mx-auto mb-1 text-[#E11D48]" />
                       Loading live attendee records...
                     </td>
                   </tr>
                 ) : attendees.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-stone-500">
+                    <td colSpan={5} className="py-8 text-center text-zinc-500">
                       No student registrations found for this event yet.
                     </td>
                   </tr>
                 ) : (
                   attendees.map((a) => (
-                    <tr key={a._id} className="hover:bg-[#23201c]/50 transition-colors">
+                    <tr key={a._id} className="hover:bg-[#FAF9F6] transition-colors">
                       <td className="py-2.5 px-3">
-                        <div className="font-bold text-white">{a.student?.name || "Participant"}</div>
-                        <div className="text-[10px] text-stone-500 font-mono truncate max-w-[120px]">
+                        <div className="font-bold text-[#18181B]">{a.student?.name || "Participant"}</div>
+                        <div className="text-[10px] text-zinc-500 font-mono truncate max-w-[120px]">
                           {a.student?.email}
                         </div>
                       </td>
-                      <td className="py-2.5 px-3 text-stone-400">
+                      <td className="py-2.5 px-3 text-zinc-600">
                         {a.student?.rollNo || "N/A"}{" "}
-                        <span className="text-stone-500">({a.student?.branch || "General"})</span>
+                        <span className="text-zinc-500">({a.student?.branch || "General"})</span>
                       </td>
-                      <td className="py-2.5 px-3 text-[#f59e0b] font-mono text-[10px] sm:text-[11px] font-bold">
+                      <td className="py-2.5 px-3 text-[#C2410C] font-mono text-[10px] sm:text-[11px] font-bold">
                         {a.teamName || "Individual"}
                       </td>
                       <td className="py-2.5 px-3">
                         <span
-                          className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded ${
+                          className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded border ${
                             a.feeStatus === "Paid"
-                              ? "bg-emerald-500/15 text-emerald-400"
-                              : "bg-amber-500/15 text-amber-400"
+                              ? "bg-[#ECFDF5] text-[#047857] border-[#A7F3D0]"
+                              : "bg-[#FFF7ED] text-[#C2410C] border-[#FED7AA]"
                           }`}
                         >
                           {a.feeStatus}
@@ -565,12 +567,12 @@ export default function AdminGate({ events = [], viewMode = "dashboard", user })
                       </td>
                       <td className="py-2.5 px-3">
                         {a.checkedIn ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] text-[#10b981] font-bold">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
+                          <span className="inline-flex items-center gap-1 text-[10px] text-[#047857] font-bold">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#047857]" />
                             <span>{a.checkedInAt || "Verified"}</span>
                           </span>
                         ) : (
-                          <span className="text-[10px] text-stone-500 font-medium font-mono">
+                          <span className="text-[10px] text-zinc-400 font-medium font-mono">
                             Pending Gate
                           </span>
                         )}

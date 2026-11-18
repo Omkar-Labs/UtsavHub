@@ -90,7 +90,7 @@ export default function PaymentModal({
           contact: "9999999999",
         },
         theme: {
-          color: "#ff4d2e",
+          color: "#E11D48",
         },
         modal: {
           ondismiss: function () {
@@ -116,28 +116,28 @@ export default function PaymentModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-[#1a1815] border-2 border-[#38332d] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl relative overflow-hidden">
-        {/* Retro Header Accent Bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#ff4d2e] via-[#f59e0b] to-[#10b981]"></div>
+    <div className="fixed inset-0 z-50 bg-zinc-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white border border-[#E4E2DD] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl relative overflow-hidden text-[#18181B]">
+        {/* Editorial Header Accent Bar */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#E11D48] to-[#F43F5E]"></div>
 
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-4 pt-1 sm:pt-2">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#f59e0b]">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#C2410C]">
                 Razorpay Standard Gateway
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-[#10b981]/15 text-[#10b981] font-mono text-[9px] font-bold border border-[#10b981]/30">
+              <span className="px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-mono text-[9px] font-bold border border-[#A7F3D0]">
                 Official Verification
               </span>
             </div>
-            <h2 className="font-headline text-xl sm:text-2xl font-extrabold text-[#fcfaf6]">Event Entry Fee Payment</h2>
-            <p className="text-xs text-stone-400 mt-0.5 truncate max-w-[280px] sm:max-w-none">{eventTitle}</p>
+            <h2 className="font-headline text-xl sm:text-2xl font-extrabold text-[#18181B]">Event Entry Fee Payment</h2>
+            <p className="text-xs text-zinc-500 mt-0.5 truncate max-w-[280px] sm:max-w-none">{eventTitle}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl text-stone-400 hover:text-white hover:bg-[#2c2824] transition-colors shrink-0"
+            className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100 transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -145,39 +145,39 @@ export default function PaymentModal({
 
         {/* Error Alert */}
         {errorMessage && (
-          <div className="p-3 mb-4 rounded-xl sm:rounded-2xl bg-red-950/60 border border-red-500/40 text-red-300 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+          <div className="p-3 mb-4 rounded-xl sm:rounded-2xl bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-[#BE123C]" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {/* Invoice Summary Box */}
-        <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#131211] border border-[#2c2824] mb-4 sm:mb-5 space-y-2 text-xs">
-          <div className="flex justify-between text-stone-300">
+        <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#FAF9F6] border border-[#E4E2DD] mb-4 sm:mb-5 space-y-2 text-xs">
+          <div className="flex justify-between text-zinc-600">
             <span>Attendee:</span>
-            <span className="font-semibold text-white truncate max-w-[180px]">{user?.name}</span>
+            <span className="font-semibold text-zinc-900 truncate max-w-[180px]">{user?.name}</span>
           </div>
-          <div className="flex justify-between text-stone-300">
+          <div className="flex justify-between text-zinc-600">
             <span>Roll / College:</span>
-            <span className="font-mono text-stone-400 truncate max-w-[180px]">{user?.rollNo} • {user?.college}</span>
+            <span className="font-mono text-zinc-500 truncate max-w-[180px]">{user?.rollNo} • {user?.college}</span>
           </div>
           {teamName && (
-            <div className="flex justify-between text-stone-300">
+            <div className="flex justify-between text-zinc-600">
               <span>Squad Name:</span>
-              <span className="font-bold text-[#f59e0b] truncate max-w-[180px]">{teamName}</span>
+              <span className="font-bold text-[#C2410C] truncate max-w-[180px]">{teamName}</span>
             </div>
           )}
-          <div className="border-t border-[#2c2824] pt-2 flex justify-between items-center text-sm">
-            <span className="font-bold text-white">Total Amount:</span>
-            <span className="font-headline text-lg sm:text-xl font-extrabold text-[#10b981]">
+          <div className="border-t border-[#E4E2DD] pt-2 flex justify-between items-center text-sm">
+            <span className="font-bold text-zinc-900">Total Amount:</span>
+            <span className="font-headline text-lg sm:text-xl font-extrabold text-[#047857]">
               ₹{eventFee.toLocaleString("en-IN")}
             </span>
           </div>
         </div>
 
         {/* Info Pill */}
-        <div className="flex items-center gap-2 text-stone-400 text-[10px] sm:text-[11px] mb-5 sm:mb-6 px-1">
-          <ShieldCheck className="w-4 h-4 text-[#10b981] shrink-0" />
+        <div className="flex items-center gap-2 text-zinc-500 text-[10px] sm:text-[11px] mb-5 sm:mb-6 px-1">
+          <ShieldCheck className="w-4 h-4 text-[#047857] shrink-0" />
           <span>Secured via Razorpay SHA-256 HMAC &amp; Instant Ticket Dispatch</span>
         </div>
 
@@ -185,7 +185,7 @@ export default function PaymentModal({
         <button
           onClick={handleRazorpayCheckout}
           disabled={isProcessing}
-          className="w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-[#ff4d2e] hover:bg-[#e63d1e] text-white font-extrabold text-xs sm:text-sm shadow-xl shadow-[#ff4d2e]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-[#E11D48] hover:bg-[#BE123C] text-white font-extrabold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {isProcessing ? (
             <>

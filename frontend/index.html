@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎪</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UtsavHub - Retro-Collegiate Event & Team Platform</title>
+    <title>UtsavHub - Collegiate Event & Squad Management Platform</title>
 
     <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,31 +20,31 @@
         theme: {
           extend: {
             colors: {
-              // Retro Funky & Premium Warm Collegiate Palette
-              'primary': '#ff4d2e',             // Retro Vermilion / Electric Terracotta
-              'primary-hover': '#e63d1e',
-              'primary-container': '#381610',
+              // Warm Alabaster & Coral Flame (Luma/Eventbrite Editorial Light Palette)
+              'primary': '#E11D48',             // Vibrant Rose-600 / Coral Flame
+              'primary-hover': '#BE123C',       // Deep Rose-700
+              'primary-container': '#FFE4E6',   // Soft Rose-100 Glow
               'on-primary': '#ffffff',
-              'on-primary-container': '#ffdad2',
+              'on-primary-container': '#9F1239',
 
-              'secondary': '#f59e0b',           // Vintage Trophy Mustard / Honey Amber
-              'secondary-container': '#422405',
-              'on-secondary': '#1c1917',
+              'secondary': '#C2410C',           // Warm Amber / Terra
+              'secondary-container': '#FFF7ED',
+              'on-secondary': '#431407',
 
-              'tertiary': '#10b981',            // Retro Varsity Emerald / Mint
-              'tertiary-container': '#063725',
+              'tertiary': '#047857',            // Emerald Leaf
+              'tertiary-container': '#ECFDF5',
 
-              'background': '#131211',          // Rich Warm Espresso Noir
-              'surface': '#1a1815',             // Warm Cocoa Charcoal
-              'surface-container-low': '#1a1815',
-              'surface-container': '#23201c',   // Warm Card Slate
-              'surface-container-high': '#2c2824',
-              'surface-container-highest': '#38332d',
+              'background': '#FAF9F6',          // Warm Alabaster
+              'surface': '#ffffff',             // Crisp Pure White
+              'surface-container-low': '#FAF9F6',
+              'surface-container': '#F3F1EC',   // Subtle Secondary Sand
+              'surface-container-high': '#EAE7E1',
+              'surface-container-highest': '#E4E2DD',
 
-              'on-surface': '#fcfaf6',          // Warm Cream White
-              'on-surface-variant': '#a8a29e',  // Warm Stone / Sand
-              'outline': '#57534e',             // Vintage Warm Border
-              'outline-variant': '#2b2723'
+              'on-surface': '#18181B',          // Deep Charcoal zinc-900
+              'on-surface-variant': '#52525B',  // zinc-600
+              'outline': '#E4E2DD',             // Hairline sand border
+              'outline-variant': '#D4D0C8'
             },
             fontFamily: {
               sans: ['Plus Jakarta Sans', 'sans-serif'],
@@ -56,8 +56,8 @@
     </script>
     <style>
       body {
-        background-color: #131211;
-        color: #fcfaf6;
+        background-color: #FAF9F6;
+        color: #18181B;
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
       ::-webkit-scrollbar {
@@ -65,20 +65,20 @@
         height: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #131211;
+        background: #FAF9F6;
       }
       ::-webkit-scrollbar-thumb {
-        background: #2c2824;
+        background: #E4E2DD;
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #38332d;
+        background: #D4D0C8;
       }
     </style>
     <!-- Razorpay Standard Checkout SDK -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
-  <body class="bg-[#131211] text-[#fcfaf6] min-h-screen selection:bg-[#ff4d2e] selection:text-white">
+  <body class="bg-[#FAF9F6] text-[#18181B] min-h-screen selection:bg-[#FFE4E6] selection:text-[#E11D48]">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

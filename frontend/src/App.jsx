@@ -110,16 +110,16 @@ export default function App() {
   // Session Initialization Loader
   if (isAuthLoading) {
     return (
-      <div className="min-h-screen bg-[#090d16] flex flex-col items-center justify-center text-white">
-        <Loader2 className="w-10 h-10 text-[#ff4d2e] animate-spin mb-4" />
-        <span className="font-headline font-bold text-lg tracking-wider">UtsavHub</span>
-        <span className="text-xs text-stone-400 mt-1">Verifying secure student &amp; admin session...</span>
+      <div className="min-h-screen bg-[#FAF9F6] flex flex-col items-center justify-center text-[#18181B]">
+        <Loader2 className="w-10 h-10 text-[#E11D48] animate-spin mb-4" />
+        <span className="font-headline font-bold text-lg tracking-wider text-[#18181B]">UtsavHub</span>
+        <span className="text-xs text-[#71717A] mt-1">Verifying secure student &amp; admin session...</span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090B] text-white selection:bg-violet-500/30">
+    <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-[#18181B] selection:bg-[#FFE4E6] selection:text-[#E11D48]">
       {/* 1. FIRST TIME / GUEST EXPERIENCE */}
       {!isAuthenticated ? (
         <LandingHero
