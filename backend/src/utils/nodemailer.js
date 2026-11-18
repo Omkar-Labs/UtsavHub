@@ -7,15 +7,20 @@ import nodemailer from "nodemailer";
  * you MUST use a 16-character Google App Password (not your normal Gmail password).
  * Generate it at: Google Account -> Security -> 2-Step Verification -> App Passwords
  */
+const emailPort = Number(process.env.EMAIL_PORT) || 587;
+const isSecure = emailPort === 465;
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: emailPort,
+  secure: isSecure, // false for port 587 (STARTTLS), true for port 465
   auth: {
     user: process.env.EMAIL_USER || "omkartripathi36@gmail.com",
     pass: process.env.EMAIL_PASS, // 16-digit Google App Password
   },
-  family: 4, // Force IPv4 connection to prevent ENETUNREACH on Render
+  tls: {
+    rejectUnauthorized: true,
+  },
 });
 
 /**
