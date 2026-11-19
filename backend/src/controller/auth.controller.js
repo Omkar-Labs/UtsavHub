@@ -223,7 +223,7 @@ export const loginController = async (req, res) => {
  */
 export const refreshAccessTokenController = async (req, res) => {
   try {
-    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+    const incomingRefreshToken = req.cookies?.refreshToken || req.body?.refreshToken;
 
     if (!incomingRefreshToken) {
       return res.status(401).json({ success: false, message: "Refresh token missing" });

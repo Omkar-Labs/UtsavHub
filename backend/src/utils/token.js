@@ -23,12 +23,14 @@ export const generateAccessAndRefreshTokens = async (userId) => {
   }
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 /**
  * Standard cookie configuration options
  */
 export const cookieOptions = {
   httpOnly: true, // Prevents client-side JS from reading cookie (XSS protection)
-  secure: process.env.NODE_ENV === "production", // Only sent over HTTPS in production
-  sameSite: "lax", // Protects against CSRF
+  secure: isProduction, // Only sent over HTTPS in production
+  sameSite: isProduction ? "none" : "lax", // 'none' is mandatory for cross-site cookies in production
   path: "/",
 };
